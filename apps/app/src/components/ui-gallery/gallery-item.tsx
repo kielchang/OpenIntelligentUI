@@ -10,6 +10,8 @@ const STATE_LABEL: Record<GalleryItemState, string> = {
 };
 
 export interface GalleryItemProps {
+  /** 頁內深連結用的錨點 */
+  id?: string;
   name: string;
   exportName?: string;
   path: string;
@@ -24,6 +26,7 @@ export interface GalleryItemProps {
 
 /** 每一個被展示的 UI 單元：名稱、export、檔案路徑、掛載狀態、props 摘要與 demo 槽 */
 export function GalleryItem({
+  id,
   name,
   exportName,
   path,
@@ -35,7 +38,7 @@ export function GalleryItem({
   children,
 }: GalleryItemProps) {
   return (
-    <article className={`gal-item${wide ? " gal-item--wide" : ""}`} data-state={state}>
+    <article id={id} className={`gal-item${wide ? " gal-item--wide" : ""}`} data-state={state}>
       <header className="gal-item-head">
         <h3>{name}</h3>
         <span className="gal-badge" data-state={state}>

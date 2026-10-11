@@ -129,7 +129,7 @@ export function UnmountedSection() {
         </GalleryItem>
 
         <GalleryItem
-          name="範本卡"
+          id="item-template-card" name="範本卡"
           exportName="TemplateCard"
           path="apps/app/src/components/template-library/template-card.tsx"
           state="unmounted"

@@ -114,6 +114,20 @@ describe("UiGalleryPage", () => {
     expect(screen.getByText(/模擬送出（未連接代理）：Explain this split/)).toBeInTheDocument();
   });
 
+  it("links every design-method rule to an element that exists on the page", () => {
+    render(
+      <Providers>
+        <UiGalleryPage />
+      </Providers>,
+    );
+    const anchors = Array.from(document.querySelectorAll<HTMLAnchorElement>('#method a[href^="#"]'));
+    expect(anchors.length).toBeGreaterThan(20);
+    anchors.forEach((anchor) => {
+      const target = anchor.getAttribute("href")!.slice(1);
+      expect(document.getElementById(target), `#${target}`).not.toBeNull();
+    });
+  });
+
   it("opens the real provider keys dialog from the chat-shell section", () => {
     render(
       <Providers>

@@ -97,7 +97,7 @@ export function ChatShellSection() {
       {keysOpen && <ProviderKeysDialog onClose={() => setKeysOpen(false)} disabled={agent.isRunning} />}
 
       <GalleryItem
-        name="聊天外殼（標頭 + CopilotChat）"
+        id="item-chat-shell" name="聊天外殼（標頭 + CopilotChat）"
         exportName="HomePage"
         path="apps/app/src/app/page.tsx"
         state="mounted"

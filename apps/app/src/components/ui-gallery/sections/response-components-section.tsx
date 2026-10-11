@@ -110,7 +110,7 @@ export function ResponseComponentsSection() {
         </GalleryItem>
 
         <GalleryItem
-          name="自訂 UI 載入中 placeholder"
+          id="item-loading-placeholder" name="自訂 UI 載入中 placeholder"
           exportName="OpenGenUIActivityRenderer（generating:true）"
           path="apps/app/src/components/generative-ui/open-generative-ui/renderer.tsx"
           state="mounted"
@@ -121,7 +121,7 @@ export function ResponseComponentsSection() {
         </GalleryItem>
 
         <GalleryItem
-          name="匯出選單"
+          id="item-export-overlay" name="匯出選單"
           exportName="ExportOverlay"
           path="apps/app/src/components/generative-ui/export-overlay.tsx"
           state="mounted"
@@ -133,7 +133,7 @@ export function ResponseComponentsSection() {
         </GalleryItem>
 
         <GalleryItem
-          name="A2UI 表格（真實 catalog 路徑）"
+          id="item-data-table" name="A2UI 表格（真實 catalog 路徑）"
           exportName="DataTable · tableCatalog"
           path="apps/app/src/components/generative-ui/table-catalog.tsx"
           state="mounted"
@@ -172,7 +172,7 @@ export function ResponseComponentsSection() {
         </GalleryItem>
 
         <GalleryItem
-          name="排程卡（human-in-the-loop）"
+          id="item-meeting-picker" name="排程卡（human-in-the-loop）"
           exportName="MeetingTimePicker"
           path="apps/app/src/components/generative-ui/meeting-time-picker.tsx"
           state="mounted"

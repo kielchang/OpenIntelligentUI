@@ -7,6 +7,7 @@ export interface GallerySectionMeta {
 /** 頁面區塊順序；導覽、頁內錨點與測試都以此為準 */
 export const GALLERY_SECTIONS: GallerySectionMeta[] = [
   { id: "overview", label: "總覽與架構", blurb: "產品定位、請求流程、串流契約與 Jev 路由" },
+  { id: "method", label: "設計方法", blurb: "決策、約束、交付三層：每條規則對照原始檔案與頁內 demo" },
   { id: "design-system", label: "設計系統", blurb: "沙箱用的 token、表單控制項與 SVG 類別" },
   { id: "color", label: "色彩學與配色", blurb: "色彩家族、OKLCH、WCAG 對比、圖表與警示色" },
   { id: "chat-shell", label: "聊天外殼", blurb: "正式畫面：標頭、CopilotChat、金鑰對話框、錯誤橫幅" },

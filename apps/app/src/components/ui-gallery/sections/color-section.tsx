@@ -253,7 +253,7 @@ export function ColorSection() {
 
       <h3 className="gal-subhead">5 · 圖表配色</h3>
       <div className="gal-stack">
-        <GalleryItem name="CHART_COLORS 的色盲與灰階檢查" path="apps/app/src/components/generative-ui/charts/config.ts" state="mounted" demo="plain" wide
+        <GalleryItem id="item-chart-cvd" name="CHART_COLORS 的色盲與灰階檢查" path="apps/app/src/components/generative-ui/charts/config.ts" state="mounted" demo="plain" wide
           note={
             <div>
               <p>dataviz 驗證腳本（validate_palette.js）結論：</p>
@@ -322,7 +322,7 @@ export function ColorSection() {
           </GalleryItem>
         </div>
 
-        <GalleryItem name="SVG 九色階在兩種模式的 fill / stroke / text" path="packages/design-system/src/index.ts（SVG_CLASSES_CSS）" state="mounted" demo="plain" wide
+        <GalleryItem id="item-svg-ramps" name="SVG 九色階在兩種模式的 fill / stroke / text" path="packages/design-system/src/index.ts（SVG_CLASSES_CSS）" state="mounted" demo="plain" wide
           note={<p>這組是「淡底、深框、深字」的圖解色，不是圖表分類色；技能文件規定一張圖 2–3 階、顏色對應類別。驗證腳本指出 amber／green 與 pink／coral 相鄰時色盲難分，所以圖解要靠標籤與形狀而不是只靠色階。</p>}
         >
           <div className="gal-swatch-grid">
@@ -342,7 +342,7 @@ export function ColorSection() {
       </div>
 
       <h3 className="gal-subhead">6 · 警示／狀態色：用強度分級，不用更多色相</h3>
-      <GalleryItem name="四種語意色的兩種強度" path="packages/design-system/src/index.ts（--color-*-info/success/warning/danger）" state="mounted" demo="plain" wide
+      <GalleryItem id="item-alert-tiers" name="四種語意色的兩種強度" path="packages/design-system/src/index.ts（--color-*-info/success/warning/danger）" state="mounted" demo="plain" wide
         note={
           <div>
             <p>專案的 bg + text + border 三件組正是 Carbon 的 low-contrast tint 結構，但沒有 high-contrast 層；錯誤橫幅用自己的 #ffac4d、QrModal 用 #e6a817／#1b936f，都沒走這組 token。</p>

@@ -998,3 +998,26 @@
     animation: none;
   }
 }
+
+/* ── 設計方法 ────────────────────────────────────────── */
+.gal-rules td:first-child {
+  min-width: 260px;
+  max-width: 520px;
+}
+.gal-rule-note {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+.gal-anchor {
+  color: var(--color-mint-dark);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.gal-anchor:hover {
+  text-decoration: underline;
+}
+:root.dark .gal-anchor {
+  color: var(--color-mint);
+}

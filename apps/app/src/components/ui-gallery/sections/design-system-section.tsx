@@ -131,7 +131,7 @@ export function DesignSystemSection() {
       </div>
 
       <GalleryItem
-        name="表單控制項與 SVG 類別（沙箱內實際樣式）"
+        id="item-design-frame" name="表單控制項與 SVG 類別（沙箱內實際樣式）"
         exportName="FORM_STYLES_CSS · SVG_CLASSES_CSS"
         path="packages/design-system/src/index.ts"
         state="mounted"

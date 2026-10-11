@@ -5,6 +5,7 @@ import { GalleryToastProvider } from "./gallery-toast";
 import { GallerySandboxProvider } from "./gallery-sandbox";
 import { GalleryNav, GalleryTopBar } from "./gallery-nav";
 import { OverviewSection } from "./sections/overview-section";
+import { DesignMethodSection } from "./sections/design-method-section";
 import { DesignSystemSection } from "./sections/design-system-section";
 import { ColorSection } from "./sections/color-section";
 import { ChatShellSection } from "./sections/chat-shell-section";
@@ -25,6 +26,7 @@ export function UiGalleryPage() {
             <GalleryNav />
             <main className="gal-main" id="gallery-main">
               <OverviewSection />
+              <DesignMethodSection />
               <DesignSystemSection />
               <ColorSection />
               <ChatShellSection />
