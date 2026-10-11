@@ -13,6 +13,7 @@ import { ResponseComponentsSection } from "./sections/response-components-sectio
 import { GenerativeSection } from "./sections/generative-section";
 import { UnmountedSection } from "./sections/unmounted-section";
 import { AgentDefinedSection } from "./sections/agent-defined-section";
+import { CatalogSection } from "./sections/catalog-section";
 import { FindingsSection } from "./sections/findings-section";
 
 /** /gallery 頁面本體：所有已設計的 UI 都在這裡攤開可操作 */
@@ -34,6 +35,7 @@ export function UiGalleryPage() {
               <GenerativeSection />
               <UnmountedSection />
               <AgentDefinedSection />
+              <CatalogSection />
               <FindingsSection />
             </main>
           </div>

@@ -1,9 +1,10 @@
 "use client";
 
-import { Component, useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState } from "react";
 import { A2UIProvider, A2UIRenderer, basicCatalog, useA2UIActions } from "@copilotkit/a2ui-renderer";
 import { GallerySection } from "../gallery-section";
 import { GalleryItem } from "../gallery-item";
+import { RenderBoundary } from "../render-boundary";
 import { useGalleryToast } from "../gallery-toast";
 import { AGENT_TOOLS } from "../analysis-content";
 import { TODO_FIXTURES, type TodoFixture } from "../gallery-fixtures";
@@ -37,16 +38,6 @@ function LoginSurface() {
     ]);
   }, [processMessages]);
   return <A2UIRenderer surfaceId={LOGIN_SURFACE} />;
-}
-
-class RenderBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { failed: boolean }> {
-  state = { failed: false };
-  static getDerivedStateFromError() {
-    return { failed: true };
-  }
-  render() {
-    return this.state.failed ? this.props.fallback : this.props.children;
-  }
 }
 
 /** 與 form.py 結構一一對應的靜態複刻（Card → Column → …） */

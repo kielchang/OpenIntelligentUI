@@ -1021,3 +1021,110 @@
 :root.dark .gal-anchor {
   color: var(--color-mint);
 }
+
+/* ── 材料集合 ─────────────────────────────────────────── */
+.gal-wired {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--surface-quaternary);
+  color: var(--text-secondary);
+}
+.gal-wired[data-wired="wired"] {
+  background: rgba(27, 147, 111, 0.14);
+  color: var(--color-mint-dark);
+}
+.gal-wired[data-wired="partial"] {
+  background: rgba(230, 168, 23, 0.16);
+  color: #8a5a00;
+}
+:root.dark .gal-wired[data-wired="partial"] {
+  color: #f0b94a;
+}
+.gal-wired[data-wired="unwired"] {
+  background: rgba(163, 45, 45, 0.12);
+  color: #a32d2d;
+}
+:root.dark .gal-wired[data-wired="unwired"] {
+  color: #f08a8a;
+}
+.gal-wired[data-wired="external"] {
+  background: rgba(149, 153, 204, 0.18);
+  color: #5a5fa8;
+}
+:root.dark .gal-wired[data-wired="external"] {
+  color: var(--color-lilac);
+}
+.gal-wired-note {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+/* 渲染器的 inline 樣式假設淺色底，深色模式也維持白色舞台 */
+.gal-a2ui-stage {
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  overflow: auto;
+  min-height: 120px;
+}
+.gal-a2ui-stage h1,
+.gal-a2ui-stage h2,
+.gal-a2ui-stage h3,
+.gal-a2ui-stage h4,
+.gal-a2ui-stage h5 {
+  margin: 0 0 6px;
+  line-height: 1.25;
+}
+.gal-a2ui-stage input,
+.gal-a2ui-stage textarea,
+.gal-a2ui-stage select,
+.gal-a2ui-stage button {
+  font: inherit;
+}
+/* 渲染器以 material-symbols-outlined 的 24px 盒子印出 icon 名稱；沒有該字型時改成可讀的小標籤 */
+.gal-a2ui-stage .material-symbols-outlined {
+  width: auto !important;
+  height: auto !important;
+  font-size: 12px !important;
+  font-family: var(--font-mono, ui-monospace, monospace) !important;
+  padding: 2px 6px;
+  margin-right: 6px;
+  border: 1px dashed #b5b5b5;
+  border-radius: 4px;
+  color: #444;
+}
+.gal-a2ui-stage video {
+  max-width: 240px;
+  width: 100%;
+  background: #e2e2e2;
+  border-radius: 6px;
+}
+.gal-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.gal-chips li {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--surface-tertiary);
+  border: 1px solid var(--border-default);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 12px;
+}
+.gal-covers {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--text-tertiary);
+}

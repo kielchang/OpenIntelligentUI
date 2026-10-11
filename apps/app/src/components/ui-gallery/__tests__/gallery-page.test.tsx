@@ -120,12 +120,26 @@ describe("UiGalleryPage", () => {
         <UiGalleryPage />
       </Providers>,
     );
-    const anchors = Array.from(document.querySelectorAll<HTMLAnchorElement>('#method a[href^="#"]'));
-    expect(anchors.length).toBeGreaterThan(20);
+    const anchors = Array.from(document.querySelectorAll<HTMLAnchorElement>('#method a[href^="#"], #catalogs a[href^="#"]'));
+    expect(anchors.length).toBeGreaterThan(40);
     anchors.forEach((anchor) => {
       const target = anchor.getAttribute("href")!.slice(1);
       expect(document.getElementById(target), `#${target}`).not.toBeNull();
     });
+  });
+
+  it("renders the A2UI basic catalog live and reports button actions as toasts", async () => {
+    render(
+      <Providers>
+        <UiGalleryPage />
+      </Providers>,
+    );
+    expect(await screen.findByRole("heading", { level: 1, name: "A2UI 基本目錄 h1 標題" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "方案 A" })).toBeInTheDocument();
+    expect(screen.getByText(/formatString：Sample Lee/)).toBeInTheDocument();
+    expect(screen.getByRole("slider", { name: /Volume/ })).toHaveValue("40");
+    fireEvent.click(screen.getByRole("button", { name: "Primary：送出 action" }));
+    expect(await screen.findByText(/A2UI action：submit（來自 btn-primary）/)).toBeInTheDocument();
   });
 
   it("opens the real provider keys dialog from the chat-shell section", () => {

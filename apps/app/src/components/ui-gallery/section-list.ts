@@ -15,5 +15,6 @@ export const GALLERY_SECTIONS: GallerySectionMeta[] = [
   { id: "generative", label: "生成式 UI 範例", blurb: "真實串流渲染器重播六欄位 payload" },
   { id: "unmounted", label: "已設計未掛載", blurb: "寫好但沒有任何入口的元件與樣式" },
   { id: "agent-defined", label: "代理端定義的 UI", blurb: "A2UI 登入卡、待辦型別、工具與渲染器對照" },
+  { id: "catalogs", label: "材料集合", blurb: "模型能從哪些集合裡挑：A2UI 基本目錄 18 個元件實渲染、專案目錄、Controlled 元件、沙箱材料、技能與工具" },
   { id: "findings", label: "解析發現", blurb: "程式碼層面的不一致與建議" },
 ];
