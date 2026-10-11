@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ProviderKeysDialog } from "@/components/chat/provider-keys-dialog";
+import { ChatErrorBanner } from "@/components/chat/error-banner";
 import { useProviderKeys } from "@/components/chat/provider-keys";
 import { KeyGatedChatView } from "@/components/chat/key-gated-chat-view";
 import Image from "next/image";
@@ -115,17 +116,12 @@ export default function HomePage() {
       {keysOpen && <ProviderKeysDialog onClose={() => setKeysOpen(false)} disabled={agent.isRunning || retrying} />}
       <main id="main-content" className="chat-main">
         {error && (
-          <div className="chat-error" role="alert">
-            <p>{error}</p>
-            <button
-              type="button"
-              onClick={retry}
-              disabled={retrying || agent.isRunning}
-            >
-              Retry answer
-            </button>
-            <button type="button" className="provider-keys-recover" disabled={retrying || agent.isRunning} onClick={() => setKeysOpen(true)}>API keys</button>
-          </div>
+          <ChatErrorBanner
+            message={error}
+            busy={retrying || agent.isRunning}
+            onRetry={retry}
+            onOpenKeys={() => setKeysOpen(true)}
+          />
         )}
         <div className="chat-content" ref={chatRoot}>
           <CopilotChat
