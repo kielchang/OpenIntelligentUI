@@ -63,7 +63,8 @@ function stubBrowserApis() {
   );
 }
 
-describe("UiGalleryPage", () => {
+// 每個案例都完整渲染整頁（含 A2UI 與 CopilotChat），在 turbo 平行跑全部套件時第一次渲染會超過預設 5 秒
+describe("UiGalleryPage", { timeout: 30_000 }, () => {
   beforeEach(stubBrowserApis);
   afterEach(() => {
     cleanup();
