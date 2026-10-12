@@ -1,0 +1,46 @@
+<!-- @dsCard group="Data" height=320 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KeyValueList</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-4); }
+  .demo-card { padding: var(--space-4); border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--surface-primary); }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); margin: 0 0 var(--space-2); }
+</style>
+</head>
+<body>
+  <div class="demo-grid">
+    <div class="demo-card">
+      <p class="lm-demo-label">兩欄 + 分組標題（示意資料）</p>
+      <dl class="lm-kv">
+        <dt class="lm-kv__group">基本</dt>
+        <dt>GPN</dt><dd class="lm-kv__mono">ZZ-000123</dd>
+        <dt>姓名</dt><dd>樣本·林晴</dd>
+        <dt>單位</dt><dd><a class="lm-kv__link" href="#unit">樣本營運部</a></dd>
+        <dt class="lm-kv__group">任職</dt>
+        <dt>生效期間</dt><dd class="lm-kv__mono">[2026-01-01, ∞)</dd>
+        <dt>到職備註</dt><dd class="lm-kv__multi">由 SMERP 匯入
+2026-01 調整匯報線</dd>
+      </dl>
+    </div>
+    <div class="demo-card">
+      <p class="lm-demo-label">密集版（一列一組）</p>
+      <dl class="lm-kv lm-kv--dense">
+        <dt>person.id</dt><dd class="lm-kv__mono">0192ab3c…</dd>
+        <dt>職位</dt><dd>資深工程師</dd>
+        <dt>主管職位</dt><dd>營運部經理</dd>
+        <dt>FTE</dt><dd class="lm-kv__mono">1.00</dd>
+        <dt>派遣來源</dt><dd class="lm-kv__empty">—</dd>
+        <dt>SMFLOW 簽核</dt><dd class="lm-kv__empty">—</dd>
+      </dl>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!-- @dsCard group="Actions" height=200 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SegmentedControl</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-row { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); align-items: center; margin-bottom: var(--space-3); }
+  .demo-row:last-child { margin-bottom: 0; }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); width: 100%; }
+</style>
+</head>
+<body>
+  <div class="demo-row">
+    <span class="lm-demo-label">文字：切換組織圖的顯示範圍（點擊或 Tab＋Enter 切換）</span>
+    <div class="lm-seg" role="group" aria-label="顯示範圍">
+      <button type="button" class="lm-seg__btn" aria-pressed="true">全部單位</button>
+      <button type="button" class="lm-seg__btn" aria-pressed="false">直接下屬</button>
+      <button type="button" class="lm-seg__btn" aria-pressed="false">主管鏈</button>
+    </div>
+  </div>
+  <div class="demo-row">
+    <span class="lm-demo-label">帶圖示：主題切換；右側為停用的群組</span>
+    <div class="lm-seg" role="group" aria-label="主題">
+      <button type="button" class="lm-seg__btn" aria-pressed="false">
+        <svg class="lm-seg__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1"/></svg>
+        淺色
+      </button>
+      <button type="button" class="lm-seg__btn" aria-pressed="true">
+        <svg class="lm-seg__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 9.5A5.5 5.5 0 0 1 6.5 2.5a5.5 5.5 0 1 0 7 7z"/></svg>
+        深色
+      </button>
+      <button type="button" class="lm-seg__btn" aria-pressed="false">
+        <svg class="lm-seg__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="12" height="8" rx="1.5"/><path d="M6 13.5h4M8 11v2.5"/></svg>
+        跟隨系統
+      </button>
+    </div>
+    <div class="lm-seg" role="group" aria-label="版本（停用）">
+      <button type="button" class="lm-seg__btn" aria-pressed="true" disabled>目前版本</button>
+      <button type="button" class="lm-seg__btn" aria-pressed="false" disabled>草稿</button>
+    </div>
+  </div>
+  <script>
+    // 示範：同一群組內單選，點擊後把 aria-pressed 移到被點的那顆
+    document.querySelectorAll('.lm-seg').forEach(function (group) {
+      group.addEventListener('click', function (event) {
+        var btn = event.target.closest('.lm-seg__btn');
+        if (!btn || btn.disabled || !group.contains(btn)) return;
+        group.querySelectorAll('.lm-seg__btn').forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+      });
+    });
+  </script>
+</body>
+</html>

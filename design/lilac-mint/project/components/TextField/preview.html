@@ -1,0 +1,58 @@
+<!-- @dsCard group="Inputs" height=330 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TextField</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); align-items: start; }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); display: block; margin-bottom: var(--space-3); }
+</style>
+</head>
+<body>
+  <span class="lm-demo-label">狀態：預設／必填＋說明／錯誤／停用／前綴／後綴（示意資料，不會送出）</span>
+  <div class="demo-grid">
+    <div class="lm-field">
+      <label class="lm-field__label" for="tf-name">姓名</label>
+      <input class="lm-input" id="tf-name" type="text" value="樣本·林" autocomplete="off">
+    </div>
+    <div class="lm-field">
+      <label class="lm-field__label" for="tf-mail">公司信箱 <span class="lm-field__required" aria-hidden="true">*</span><span class="lm-sr-only">（必填）</span></label>
+      <input class="lm-input" id="tf-mail" type="email" placeholder="name@example.invalid" required aria-describedby="tf-mail-help">
+      <p class="lm-field__help" id="tf-mail-help">用於 SMFLOW 簽核通知。</p>
+    </div>
+    <div class="lm-field">
+      <label class="lm-field__label" for="tf-title">職稱</label>
+      <input class="lm-input" id="tf-title" type="text" value="資深專員" aria-invalid="true" aria-describedby="tf-title-err">
+      <p class="lm-field__error" id="tf-title-err" role="alert">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5M8 11h.01"/></svg>
+        職稱與 SMERP 不一致，請確認後再儲存。
+      </p>
+    </div>
+    <div class="lm-field is-disabled">
+      <label class="lm-field__label" for="tf-unit">所屬單位</label>
+      <input class="lm-input" id="tf-unit" type="text" value="樣本事業群／樣本部" disabled aria-describedby="tf-unit-help">
+      <p class="lm-field__help" id="tf-unit-help">由組織圖草稿決定，無法直接編輯。</p>
+    </div>
+    <div class="lm-field">
+      <label class="lm-field__label" for="tf-gpn">員工編號（GPN）</label>
+      <div class="lm-input-group">
+        <span class="lm-input-group__affix lm-input-group__affix--mono" aria-hidden="true">ZZ-</span>
+        <input class="lm-input lm-input--number" id="tf-gpn" type="text" inputmode="numeric" value="000123" aria-label="員工編號，前綴 ZZ-">
+      </div>
+    </div>
+    <div class="lm-field">
+      <label class="lm-field__label" for="tf-fte">核定員額</label>
+      <div class="lm-input-group">
+        <input class="lm-input lm-input--number" id="tf-fte" type="text" inputmode="decimal" value="12" aria-describedby="tf-fte-unit">
+        <span class="lm-input-group__affix" id="tf-fte-unit">人</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

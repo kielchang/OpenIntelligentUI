@@ -191,6 +191,8 @@ make build
 
 With the frontend running, `http://localhost:3000/gallery` shows every designed UI element with fixture data (chat shell, response components, the streaming renderer replaying sample payloads, unmounted components, design tokens and a colour-system analysis). It needs no agent or API keys.
 
+`design/` holds the Lilac Mint design system derived from this repo and a static copy of `/gallery` that opens without the app; see `design/README.md` (in Traditional Chinese).
+
 The [launch workflow](docs/deployment.md#verification-and-launch) includes browser checks and a real provider smoke test. Tests and builds alone do not verify model access or a deployment.
 
 ## Standalone MCP

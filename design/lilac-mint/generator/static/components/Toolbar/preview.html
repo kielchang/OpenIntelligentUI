@@ -1,0 +1,51 @@
+<!-- @dsCard group="Data" height=180 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toolbar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-card { border: 1px solid var(--border-default); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface-primary); }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); margin: 0 0 var(--space-2); }
+</style>
+</head>
+<body>
+  <p class="lm-demo-label">篩選列 + 動作區 + 結果槽（窄版自動換行）</p>
+  <div class="demo-card">
+    <div class="lm-toolbar" role="toolbar" aria-label="人員名冊篩選">
+      <label class="lm-toolbar__filter">法人
+        <select class="lm-toolbar__select" aria-label="法人">
+          <option>樣本控股</option>
+          <option>樣本科技</option>
+          <option>樣本製造</option>
+        </select>
+      </label>
+      <label class="lm-toolbar__filter">生效日
+        <input class="lm-toolbar__input" type="date" value="2026-10-01" aria-label="生效日">
+      </label>
+      <span class="lm-toolbar__sep" aria-hidden="true"></span>
+      <label class="lm-toolbar__search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <span class="lm-sr-only">搜尋姓名或 GPN</span>
+        <input class="lm-toolbar__input" type="search" placeholder="搜尋姓名或 GPN">
+      </label>
+      <span class="lm-toolbar__status" role="status">128 筆 · 生效日 2026-10-01</span>
+      <span class="lm-toolbar__actions">
+        <button type="button" class="lm-toolbar__btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M6 9l6 6 6-6M4 21h16"/></svg>
+          匯出
+        </button>
+        <button type="button" class="lm-toolbar__btn lm-toolbar__btn--primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          新增草稿
+        </button>
+      </span>
+    </div>
+  </div>
+</body>
+</html>

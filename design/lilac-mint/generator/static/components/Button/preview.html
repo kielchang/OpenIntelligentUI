@@ -1,0 +1,60 @@
+<!-- @dsCard group="Actions" height=260 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Button</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-row { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-3); align-items: center; margin-bottom: var(--space-3); }
+  .demo-row:last-child { margin-bottom: 0; }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); width: 100%; }
+</style>
+</head>
+<body>
+  <div class="demo-row">
+    <span class="lm-demo-label">變體：primary／secondary／ghost／danger／brand（brand 一頁只放一顆）</span>
+    <button type="button" class="lm-btn lm-btn--primary">排程生效</button>
+    <button type="button" class="lm-btn lm-btn--secondary">儲存草稿</button>
+    <button type="button" class="lm-btn lm-btn--ghost">取消</button>
+    <button type="button" class="lm-btn lm-btn--danger">刪除草稿</button>
+    <button type="button" class="lm-btn lm-btn--brand">開始建立組織圖</button>
+  </div>
+  <div class="demo-row">
+    <span class="lm-demo-label">尺寸與狀態：sm／md／停用／載入中</span>
+    <button type="button" class="lm-btn lm-btn--secondary lm-btn--sm">小尺寸 28px</button>
+    <button type="button" class="lm-btn lm-btn--secondary">中尺寸 36px</button>
+    <button type="button" class="lm-btn lm-btn--primary" disabled>停用</button>
+    <button type="button" class="lm-btn lm-btn--primary" aria-busy="true">
+      <svg class="lm-btn__spinner" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M8 2a6 6 0 1 1-6 6"/></svg>
+      儲存中…
+    </button>
+    <button type="button" class="lm-btn lm-btn--secondary lm-btn--sm" disabled>小尺寸停用</button>
+  </div>
+  <div class="demo-row">
+    <span class="lm-demo-label">帶圖示：圖示＋文字、純圖示（aria-label）</span>
+    <button type="button" class="lm-btn lm-btn--primary">
+      <svg class="lm-btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v10M3 8h10"/></svg>
+      新增職位
+    </button>
+    <button type="button" class="lm-btn lm-btn--secondary">
+      <svg class="lm-btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 7.5 8 11l3.5-3.5M3 13h10"/></svg>
+      匯出 CSV
+    </button>
+    <button type="button" class="lm-btn lm-btn--ghost lm-btn--icon" aria-label="更多動作">
+      <svg class="lm-btn__icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="3.5" cy="8" r="1.25"/><circle cx="8" cy="8" r="1.25"/><circle cx="12.5" cy="8" r="1.25"/></svg>
+    </button>
+    <button type="button" class="lm-btn lm-btn--secondary lm-btn--icon lm-btn--sm" aria-label="重新整理">
+      <svg class="lm-btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8A5 5 0 1 1 11.5 4.5M11.5 2v3h-3"/></svg>
+    </button>
+    <button type="button" class="lm-btn lm-btn--danger lm-btn--sm">
+      <svg class="lm-btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h10M6.5 4V2.5h3V4M4.5 4l.5 9h6l.5-9M6.5 7v4M9.5 7v4"/></svg>
+      移除
+    </button>
+  </div>
+</body>
+</html>

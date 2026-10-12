@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Airplane pitch, roll and yaw</title>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://esm.sh/three",
+      "three/": "https://esm.sh/three/",
+      "gsap": "https://esm.sh/gsap",
+      "gsap/": "https://esm.sh/gsap/",
+      "d3": "https://esm.sh/d3",
+      "d3/": "https://esm.sh/d3/",
+      "chart.js": "https://esm.sh/chart.js",
+      "chart.js/": "https://esm.sh/chart.js/"
+    }
+  }
+  </script>
+  <script>window.createTripAnimator = function createTripAnimator(options) {
+  const { stopCount, onFrame, onState } = options;
+  const duration = options.durationMs ?? 6e3;
+  if (!Number.isInteger(stopCount) || stopCount < 2 || stopCount > 30)
+    throw new Error("A trip needs 2\u201330 stops.");
+  if (!Number.isFinite(duration) || duration < 1e3 || duration > 12e4)
+    throw new Error("Trip duration must be between 1 and 120 seconds.");
+  options.pinElements?.forEach((pin, index) => {
+    if (!pin.textContent?.trim()) pin.textContent = String(index + 1);
+  });
+  let elapsed = 0;
+  let lastTime = null;
+  let frameId = null;
+  let playing = false;
+  let disposed = false;
+  const reduceMotion = () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+  const emit = () => {
+    const progress = Math.min(1, elapsed / duration);
+    const step = progress * (stopCount - 1);
+    const fromIndex = Math.min(stopCount - 2, Math.floor(step));
+    const travel = Math.min(1, (step - fromIndex) / 0.8);
+    const fraction = travel * travel * (3 - 2 * travel);
+    const pinStep = progress * stopCount;
+    const pinIndex = Math.min(stopCount - 1, Math.floor(pinStep));
+    const pinProgress = progress === 1 ? 1 : Math.min(1, (pinStep - pinIndex) / 0.55);
+    options.pinElements?.forEach((pin, index) => {
+      const landing = index < pinIndex ? 1 : index === pinIndex ? pinProgress : 0;
+      const t = landing - 1;
+      const ease = 1 + 2.2 * t * t * t + 1.2 * t * t;
+      pin.style.opacity = landing > 0 ? "1" : "0";
+      pin.style.transform = `translateY(${-18 * (1 - ease)}px) scale(${0.72 + 0.28 * ease})`;
+    });
+    onFrame({
+      progress,
+      fromIndex,
+      toIndex: fromIndex + 1,
+      fraction,
+      activeStop: pinIndex,
+      pinIndex,
+      pinProgress
+    });
+  };
+  const pause = () => {
+    if (disposed) return;
+    playing = false;
+    lastTime = null;
+    if (frameId !== null) cancelAnimationFrame(frameId);
+    frameId = null;
+    onState?.(elapsed >= duration ? "complete" : "paused");
+  };
+  const tick = (time) => {
+    if (!playing || disposed) return;
+    if (lastTime !== null) elapsed = Math.min(duration, elapsed + Math.max(0, time - lastTime));
+    lastTime = time;
+    emit();
+    if (elapsed >= duration) pause();
+    else frameId = requestAnimationFrame(tick);
+  };
+  const play = () => {
+    if (disposed || playing) return;
+    if (reduceMotion()) {
+      elapsed = duration;
+      emit();
+      onState?.("complete");
+      return;
+    }
+    if (elapsed >= duration) return;
+    playing = true;
+    lastTime = null;
+    onState?.("playing");
+    frameId = requestAnimationFrame(tick);
+  };
+  const seek = (stop) => {
+    if (disposed) return;
+    if (!Number.isInteger(stop) || stop < 0 || stop >= stopCount)
+      throw new Error("Stop index is outside this trip.");
+    pause();
+    elapsed = stop === stopCount - 1 ? duration : duration * (stop + 0.6) / stopCount;
+    emit();
+    onState?.(elapsed >= duration ? "complete" : "paused");
+  };
+  const replay = () => {
+    if (disposed) return;
+    pause();
+    elapsed = 0;
+    emit();
+    play();
+  };
+  const onVisibility = () => {
+    if (document.hidden) pause();
+  };
+  const dispose = () => {
+    if (disposed) return;
+    pause();
+    disposed = true;
+    document.removeEventListener("visibilitychange", onVisibility);
+    window.removeEventListener("pagehide", dispose);
+  };
+  document.addEventListener("visibilitychange", onVisibility);
+  window.addEventListener("pagehide", dispose);
+  if (reduceMotion()) elapsed = duration;
+  emit();
+  return { play, pause, replay, seek, dispose };
+};</script>
+  <style>
+    
+:root {
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f7f6f3;
+  --color-background-tertiary: #efeee9;
+  --color-background-info: #E6F1FB;
+  --color-background-danger: #FCEBEB;
+  --color-background-success: #EAF3DE;
+  --color-background-warning: #FAEEDA;
+
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #73726c;
+  --color-text-tertiary: #9c9a92;
+  --color-text-info: #185FA5;
+  --color-text-danger: #A32D2D;
+  --color-text-success: #3B6D11;
+  --color-text-warning: #854F0B;
+
+  --color-border-primary: rgba(0, 0, 0, 0.4);
+  --color-border-secondary: rgba(0, 0, 0, 0.3);
+  --color-border-tertiary: rgba(0, 0, 0, 0.15);
+  --color-border-info: #185FA5;
+  --color-border-danger: #A32D2D;
+  --color-border-success: #3B6D11;
+  --color-border-warning: #854F0B;
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-mono: "SF Mono", "Fira Code", "Fira Mono", monospace;
+
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+
+  --p: var(--color-text-primary);
+  --s: var(--color-text-secondary);
+  --t: var(--color-text-tertiary);
+  --bg2: var(--color-background-secondary);
+  --b: var(--color-border-tertiary);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background-primary: #1a1a18;
+    --color-background-secondary: #2c2c2a;
+    --color-background-tertiary: #222220;
+    --color-background-info: #0C447C;
+    --color-background-danger: #501313;
+    --color-background-success: #173404;
+    --color-background-warning: #412402;
+
+    --color-text-primary: #e8e6de;
+    --color-text-secondary: #9c9a92;
+    --color-text-tertiary: #73726c;
+    --color-text-info: #85B7EB;
+    --color-text-danger: #F09595;
+    --color-text-success: #97C459;
+    --color-text-warning: #EF9F27;
+
+    --color-border-primary: rgba(255, 255, 255, 0.4);
+    --color-border-secondary: rgba(255, 255, 255, 0.3);
+    --color-border-tertiary: rgba(255, 255, 255, 0.15);
+    --color-border-info: #85B7EB;
+    --color-border-danger: #F09595;
+    --color-border-success: #97C459;
+    --color-border-warning: #EF9F27;
+  }
+}
+
+    
+svg text.t   { font: 400 14px var(--font-sans); fill: var(--p); }
+svg text.ts  { font: 400 12px var(--font-sans); fill: var(--s); }
+svg text.th  { font: 500 14px var(--font-sans); fill: var(--p); }
+
+svg .box > rect, svg .box > circle, svg .box > ellipse { fill: var(--bg2); stroke: var(--b); }
+svg .node { cursor: pointer; }
+svg .node:hover { opacity: 0.8; }
+svg .arr { stroke: var(--s); stroke-width: 1.5; fill: none; }
+svg .leader { stroke: var(--t); stroke-width: 0.5; stroke-dasharray: 4 4; fill: none; }
+
+/* Purple */
+svg .c-purple > rect, svg .c-purple > circle, svg .c-purple > ellipse,
+svg rect.c-purple, svg circle.c-purple, svg ellipse.c-purple { fill: #EEEDFE; stroke: #534AB7; }
+svg .c-purple text.th, svg .c-purple text.t { fill: #3C3489; }
+svg .c-purple text.ts { fill: #534AB7; }
+
+/* Teal */
+svg .c-teal > rect, svg .c-teal > circle, svg .c-teal > ellipse,
+svg rect.c-teal, svg circle.c-teal, svg ellipse.c-teal { fill: #E1F5EE; stroke: #0F6E56; }
+svg .c-teal text.th, svg .c-teal text.t { fill: #085041; }
+svg .c-teal text.ts { fill: #0F6E56; }
+
+/* Coral */
+svg .c-coral > rect, svg .c-coral > circle, svg .c-coral > ellipse,
+svg rect.c-coral, svg circle.c-coral, svg ellipse.c-coral { fill: #FAECE7; stroke: #993C1D; }
+svg .c-coral text.th, svg .c-coral text.t { fill: #712B13; }
+svg .c-coral text.ts { fill: #993C1D; }
+
+/* Pink */
+svg .c-pink > rect, svg .c-pink > circle, svg .c-pink > ellipse,
+svg rect.c-pink, svg circle.c-pink, svg ellipse.c-pink { fill: #FBEAF0; stroke: #993556; }
+svg .c-pink text.th, svg .c-pink text.t { fill: #72243E; }
+svg .c-pink text.ts { fill: #993556; }
+
+/* Gray */
+svg .c-gray > rect, svg .c-gray > circle, svg .c-gray > ellipse,
+svg rect.c-gray, svg circle.c-gray, svg ellipse.c-gray { fill: #F1EFE8; stroke: #5F5E5A; }
+svg .c-gray text.th, svg .c-gray text.t { fill: #444441; }
+svg .c-gray text.ts { fill: #5F5E5A; }
+
+/* Blue */
+svg .c-blue > rect, svg .c-blue > circle, svg .c-blue > ellipse,
+svg rect.c-blue, svg circle.c-blue, svg ellipse.c-blue { fill: #E6F1FB; stroke: #185FA5; }
+svg .c-blue text.th, svg .c-blue text.t { fill: #0C447C; }
+svg .c-blue text.ts { fill: #185FA5; }
+
+/* Green */
+svg .c-green > rect, svg .c-green > circle, svg .c-green > ellipse,
+svg rect.c-green, svg circle.c-green, svg ellipse.c-green { fill: #EAF3DE; stroke: #3B6D11; }
+svg .c-green text.th, svg .c-green text.t { fill: #27500A; }
+svg .c-green text.ts { fill: #3B6D11; }
+
+/* Amber */
+svg .c-amber > rect, svg .c-amber > circle, svg .c-amber > ellipse,
+svg rect.c-amber, svg circle.c-amber, svg ellipse.c-amber { fill: #FAEEDA; stroke: #854F0B; }
+svg .c-amber text.th, svg .c-amber text.t { fill: #633806; }
+svg .c-amber text.ts { fill: #854F0B; }
+
+/* Red */
+svg .c-red > rect, svg .c-red > circle, svg .c-red > ellipse,
+svg rect.c-red, svg circle.c-red, svg ellipse.c-red { fill: #FCEBEB; stroke: #A32D2D; }
+svg .c-red text.th, svg .c-red text.t { fill: #791F1F; }
+svg .c-red text.ts { fill: #A32D2D; }
+
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  svg text.t   { fill: #e8e6de; }
+  svg text.ts  { fill: #9c9a92; }
+  svg text.th  { fill: #e8e6de; }
+
+  svg .c-purple > rect, svg .c-purple > circle, svg .c-purple > ellipse,
+  svg rect.c-purple, svg circle.c-purple, svg ellipse.c-purple { fill: #3C3489; stroke: #AFA9EC; }
+  svg .c-purple text.th, svg .c-purple text.t { fill: #CECBF6; }
+  svg .c-purple text.ts { fill: #AFA9EC; }
+
+  svg .c-teal > rect, svg .c-teal > circle, svg .c-teal > ellipse,
+  svg rect.c-teal, svg circle.c-teal, svg ellipse.c-teal { fill: #085041; stroke: #5DCAA5; }
+  svg .c-teal text.th, svg .c-teal text.t { fill: #9FE1CB; }
+  svg .c-teal text.ts { fill: #5DCAA5; }
+
+  svg .c-coral > rect, svg .c-coral > circle, svg .c-coral > ellipse,
+  svg rect.c-coral, svg circle.c-coral, svg ellipse.c-coral { fill: #712B13; stroke: #F0997B; }
+  svg .c-coral text.th, svg .c-coral text.t { fill: #F5C4B3; }
+  svg .c-coral text.ts { fill: #F0997B; }
+
+  svg .c-pink > rect, svg .c-pink > circle, svg .c-pink > ellipse,
+  svg rect.c-pink, svg circle.c-pink, svg ellipse.c-pink { fill: #72243E; stroke: #ED93B1; }
+  svg .c-pink text.th, svg .c-pink text.t { fill: #F4C0D1; }
+  svg .c-pink text.ts { fill: #ED93B1; }
+
+  svg .c-gray > rect, svg .c-gray > circle, svg .c-gray > ellipse,
+  svg rect.c-gray, svg circle.c-gray, svg ellipse.c-gray { fill: #444441; stroke: #B4B2A9; }
+  svg .c-gray text.th, svg .c-gray text.t { fill: #D3D1C7; }
+  svg .c-gray text.ts { fill: #B4B2A9; }
+
+  svg .c-blue > rect, svg .c-blue > circle, svg .c-blue > ellipse,
+  svg rect.c-blue, svg circle.c-blue, svg ellipse.c-blue { fill: #0C447C; stroke: #85B7EB; }
+  svg .c-blue text.th, svg .c-blue text.t { fill: #B5D4F4; }
+  svg .c-blue text.ts { fill: #85B7EB; }
+
+  svg .c-green > rect, svg .c-green > circle, svg .c-green > ellipse,
+  svg rect.c-green, svg circle.c-green, svg ellipse.c-green { fill: #27500A; stroke: #97C459; }
+  svg .c-green text.th, svg .c-green text.t { fill: #C0DD97; }
+  svg .c-green text.ts { fill: #97C459; }
+
+  svg .c-amber > rect, svg .c-amber > circle, svg .c-amber > ellipse,
+  svg rect.c-amber, svg circle.c-amber, svg ellipse.c-amber { fill: #633806; stroke: #EF9F27; }
+  svg .c-amber text.th, svg .c-amber text.t { fill: #FAC775; }
+  svg .c-amber text.ts { fill: #EF9F27; }
+
+  svg .c-red > rect, svg .c-red > circle, svg .c-red > ellipse,
+  svg rect.c-red, svg circle.c-red, svg ellipse.c-red { fill: #791F1F; stroke: #F09595; }
+  svg .c-red text.th, svg .c-red text.t { fill: #F7C1C1; }
+  svg .c-red text.ts { fill: #F09595; }
+}
+
+    
+* { box-sizing: border-box; margin: 0; }
+
+html { background: transparent; }
+
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-text-primary);
+  background: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 6px 16px;
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: var(--border-radius-md);
+  background: transparent;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+button:hover { background: var(--color-background-secondary); }
+button:active { transform: scale(0.98); }
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="search"],
+textarea,
+select {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 6px 12px;
+  height: 36px;
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  background: var(--color-background-primary);
+  color: var(--color-text-primary);
+  transition: border-color 0.15s;
+}
+input:hover, textarea:hover, select:hover { border-color: var(--color-border-secondary); }
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--color-border-primary);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+textarea { height: auto; min-height: 80px; resize: vertical; }
+input::placeholder, textarea::placeholder { color: var(--color-text-tertiary); }
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: var(--color-border-tertiary);
+  border-radius: 2px;
+  border: none;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-secondary);
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-secondary);
+  cursor: pointer;
+}
+
+input[type="checkbox"], input[type="radio"] {
+  width: 16px; height: 16px;
+  accent-color: var(--color-text-info);
+}
+
+a { color: var(--color-text-info); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* First render: stagger all children */
+#content.initial-render > * {
+  animation: fadeSlideIn 0.4s ease-out both;
+}
+#content.initial-render > *:nth-child(1) { animation-delay: 0s; }
+#content.initial-render > *:nth-child(2) { animation-delay: 0.06s; }
+#content.initial-render > *:nth-child(3) { animation-delay: 0.12s; }
+#content.initial-render > *:nth-child(4) { animation-delay: 0.18s; }
+#content.initial-render > *:nth-child(5) { animation-delay: 0.24s; }
+#content.initial-render > *:nth-child(n+6) { animation-delay: 0.3s; }
+
+/* Subsequent morphs: only new elements animate in */
+.morph-enter {
+  animation: fadeSlideIn 0.4s ease-out both;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+  </style>
+  <style>.ap { font-family: var(--font-sans); color: var(--color-text-primary); display: grid; gap: 12px; max-width: 640px; }
+.ap h2 { font-size: 18px; font-weight: 500; line-height: 1.3; }
+.ap-axes { list-style: none; padding: 0; display: grid; gap: 4px; font-size: 13px; line-height: 1.5; color: var(--color-text-secondary); }
+.ap-term { color: var(--color-text-primary); font-weight: 500; }
+.ap-swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+.ap-pitch { background: var(--color-text-danger); }
+.ap-roll { background: var(--color-text-success); }
+.ap-yaw { background: var(--color-text-info); }
+.ap-status { font-size: 13px; color: var(--color-text-secondary); }
+.ap-canvas { height: 260px; border-radius: var(--border-radius-lg); overflow: hidden; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); touch-action: none; cursor: grab; }
+.ap-canvas canvas { display: block; width: 100%; height: 100%; }
+.ap-controls { display: grid; gap: 10px; }
+.ap-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px; align-items: center; }
+.ap-row label { grid-column: 1 / -1; font-size: 13px; color: var(--color-text-secondary); }
+.ap-row input { width: 100%; }
+.ap-out { color: var(--color-text-primary); font-weight: 500; font-family: var(--font-mono); }
+.ap-note { font-size: 12px; color: var(--color-text-tertiary); line-height: 1.5; }</style>
+  <script>window.Websandbox = { connection: { remote: {
+  sendPrompt: async ({ text }) => { var el = document.getElementById("__gal_bridge"); if (!el) { el = document.createElement("div"); el.id = "__gal_bridge"; el.setAttribute("role", "status"); el.style.cssText = "position:fixed;left:12px;right:12px;bottom:12px;padding:10px 14px;border-radius:10px;background:var(--color-background-info);color:var(--color-text-info);border:1px solid var(--color-border-info);font:14px var(--font-sans);z-index:9999"; document.body.appendChild(el); } el.textContent = "模擬送出（靜態展示，未連接代理）：" + text; clearTimeout(el.__t); el.__t = setTimeout(function () { el.remove(); }, 4000); },
+  openLink: async ({ url }) => { if (/^https:/.test(url)) window.open(url, "_blank", "noopener,noreferrer"); }
+} } };</script>
+</head>
+<body>
+  <section class="ap" aria-labelledby="ap-title">
+  <h2 id="ap-title">Pitch, roll and yaw</h2>
+  <ul class="ap-axes">
+    <li><span class="ap-swatch ap-pitch" aria-hidden="true"></span><span class="ap-term">Pitch</span> — the nose rises or drops. Rotation about the lateral axis, the red line running wingtip to wingtip.</li>
+    <li><span class="ap-swatch ap-roll" aria-hidden="true"></span><span class="ap-term">Roll</span> — the wings bank. Rotation about the longitudinal axis, the green line running nose to tail.</li>
+    <li><span class="ap-swatch ap-yaw" aria-hidden="true"></span><span class="ap-term">Yaw</span> — the nose turns left or right. Rotation about the vertical axis, the blue line through the plane top to bottom.</li>
+  </ul>
+  <p id="status" class="ap-status" role="status">Loading 3D scene…</p>
+  <div id="ap-canvas" class="ap-canvas" aria-label="3D airplane. Drag with the pointer to orbit the camera."></div>
+  <div class="ap-controls">
+    <div class="ap-row">
+      <label for="ap-pitch">Pitch: <span class="ap-out" id="ap-pitch-out">0°</span> (−45 to 45°)</label>
+      <input id="ap-pitch" type="range" min="-45" max="45" step="1" value="0" data-axis="pitch">
+      <button type="button" data-demo="pitch">Demonstrate pitch</button>
+    </div>
+    <div class="ap-row">
+      <label for="ap-roll">Roll: <span class="ap-out" id="ap-roll-out">0°</span> (−45 to 45°)</label>
+      <input id="ap-roll" type="range" min="-45" max="45" step="1" value="0" data-axis="roll">
+      <button type="button" data-demo="roll">Demonstrate roll</button>
+    </div>
+    <div class="ap-row">
+      <label for="ap-yaw">Yaw: <span class="ap-out" id="ap-yaw-out">0°</span> (−45 to 45°)</label>
+      <input id="ap-yaw" type="range" min="-45" max="45" step="1" value="0" data-axis="yaw">
+      <button type="button" data-demo="yaw">Demonstrate yaw</button>
+    </div>
+    <div><button type="button" id="ap-reset">Reset</button></div>
+  </div>
+  <p class="ap-note">Conceptual rotation model, not a flight simulator. Positive pitch = nose up, positive roll = right wing down, positive yaw = nose right. Axes are body axes, so they turn with the plane.</p>
+</section>
+  <script>
+function planeToken(name, fallback) {
+  var value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  return value || fallback;
+}
+
+function easeInOut(t) {
+  return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+}
+
+function buildPlane(THREE, colors) {
+  var group = new THREE.Group();
+  function part(geometry, color, x, y, z) {
+    var mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: color, roughness: 0.6 }));
+    mesh.position.set(x, y, z);
+    group.add(mesh);
+    return mesh;
+  }
+  part(new THREE.CylinderGeometry(0.18, 0.28, 3.2, 24), colors.body, 0, 0, 0).rotation.z = Math.PI / 2;
+  part(new THREE.SphereGeometry(0.28, 24, 16), colors.body, 1.6, 0, 0);
+  part(new THREE.SphereGeometry(0.2, 20, 12), colors.cockpit, 0.8, 0.22, 0).scale.set(1.8, 0.7, 1);
+  part(new THREE.BoxGeometry(0.7, 0.06, 3.8), colors.wing, 0.1, 0, 0);
+  part(new THREE.BoxGeometry(0.4, 0.05, 1.4), colors.wing, -1.45, 0, 0);
+  part(new THREE.BoxGeometry(0.45, 0.8, 0.05), colors.wing, -1.45, 0.4, 0);
+  return group;
+}
+
+function axisLine(THREE, x, y, z, color) {
+  var points = [new THREE.Vector3(-x, -y, -z), new THREE.Vector3(x, y, z)];
+  return new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), new THREE.LineBasicMaterial({ color: color }));
+}
+
+async function setupScene() {
+  var status = document.getElementById("status");
+  var host = document.getElementById("ap-canvas");
+  var THREE = await import("three");
+  var renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+  } catch (error) {
+    throw new Error("WebGL could not initialize in this browser");
+  }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  host.appendChild(renderer.domElement);
+  var scene = new THREE.Scene();
+  scene.background = new THREE.Color(planeToken("--color-background-secondary", "whitesmoke"));
+  scene.add(new THREE.HemisphereLight("white", "gray", 1.1));
+  var sun = new THREE.DirectionalLight("white", 1.4);
+  sun.position.set(4, 6, 3);
+  scene.add(sun);
+  var colors = {
+    body: planeToken("--color-text-tertiary", "silver"),
+    wing: planeToken("--color-text-secondary", "gray"),
+    cockpit: planeToken("--color-text-info", "steelblue"),
+    pitch: planeToken("--color-text-danger", "crimson"),
+    roll: planeToken("--color-text-success", "seagreen"),
+    yaw: planeToken("--color-text-info", "steelblue")
+  };
+  var plane = buildPlane(THREE, colors);
+  plane.rotation.order = "YZX";
+  plane.add(axisLine(THREE, 0, 0, 2.6, colors.pitch));
+  plane.add(axisLine(THREE, 2.6, 0, 0, colors.roll));
+  plane.add(axisLine(THREE, 0, 2, 0, colors.yaw));
+  scene.add(plane);
+  var camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+  var orbit = { theta: 0.7, phi: 1.05, radius: 7.5 };
+  function placeCamera() {
+    camera.position.set(
+      orbit.radius * Math.sin(orbit.phi) * Math.sin(orbit.theta),
+      orbit.radius * Math.cos(orbit.phi),
+      orbit.radius * Math.sin(orbit.phi) * Math.cos(orbit.theta));
+    camera.lookAt(0, 0, 0);
+  }
+  var axes = ["pitch", "roll", "yaw"];
+  var angles = { pitch: 0, roll: 0, yaw: 0 };
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var tween = null;
+  var frameId = 0;
+  function applyAngles() {
+    var rad = THREE.MathUtils.degToRad;
+    plane.rotation.set(-rad(angles.roll), rad(angles.yaw), rad(angles.pitch));
+    axes.forEach(function (axis) {
+      document.getElementById("ap-" + axis).value = String(Math.round(angles[axis]));
+      document.getElementById("ap-" + axis + "-out").textContent = Math.round(angles[axis]) + "°";
+    });
+  }
+  function demonstrate(axis) {
+    if (reduced) {
+      angles[axis] = 30;
+      applyAngles();
+      status.textContent = "Reduced motion: showing " + axis + " at 30° without animation. Use the slider or Reset to change it.";
+      return;
+    }
+    tween = { axis: axis, from: angles[axis], start: performance.now(), duration: 1500 };
+    status.textContent = "Demonstrating " + axis + "…";
+  }
+  function resetAll() {
+    orbit.theta = 0.7;
+    orbit.phi = 1.05;
+    placeCamera();
+    if (reduced) {
+      angles = { pitch: 0, roll: 0, yaw: 0 };
+      applyAngles();
+    } else {
+      tween = { axis: "all", from: { pitch: angles.pitch, roll: angles.roll, yaw: angles.yaw }, start: performance.now(), duration: 1500 };
+    }
+    status.textContent = "Reset to level flight and the three-quarter view.";
+  }
+  function step(now) {
+    if (tween) {
+      var t = Math.min(1, (now - tween.start) / tween.duration);
+      var eased = easeInOut(t);
+      if (tween.axis === "all") {
+        axes.forEach(function (axis) { angles[axis] = tween.from[axis] * (1 - eased); });
+      } else {
+        angles[tween.axis] = tween.from + 35 * Math.sin(2 * Math.PI * eased);
+      }
+      applyAngles();
+      if (t >= 1) {
+        tween = null;
+        status.textContent = "Drag to orbit the camera; use the sliders or Demonstrate buttons.";
+      }
+    }
+    renderer.render(scene, camera);
+    frameId = requestAnimationFrame(step);
+  }
+  function resize() {
+    var width = host.clientWidth || 320;
+    var height = host.clientHeight || 260;
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+  }
+  var drag = null;
+  var canvas = renderer.domElement;
+  canvas.addEventListener("pointerdown", function (event) {
+    drag = { x: event.clientX, y: event.clientY };
+    canvas.setPointerCapture(event.pointerId);
+  });
+  canvas.addEventListener("pointermove", function (event) {
+    if (!drag) return;
+    orbit.theta -= (event.clientX - drag.x) * 0.01;
+    orbit.phi = Math.min(2.6, Math.max(0.4, orbit.phi - (event.clientY - drag.y) * 0.01));
+    drag = { x: event.clientX, y: event.clientY };
+    placeCamera();
+  });
+  canvas.addEventListener("pointerup", function () { drag = null; });
+  canvas.addEventListener("pointercancel", function () { drag = null; });
+  axes.forEach(function (axis) {
+    document.getElementById("ap-" + axis).addEventListener("input", function (event) {
+      tween = null;
+      var value = event.target.valueAsNumber;
+      angles[axis] = Number.isFinite(value) ? Math.max(-45, Math.min(45, value)) : 0;
+      applyAngles();
+    });
+  });
+  Array.from(document.querySelectorAll("[data-demo]")).forEach(function (button) {
+    button.addEventListener("click", function () { demonstrate(button.dataset.demo); });
+  });
+  document.getElementById("ap-reset").addEventListener("click", resetAll);
+  new ResizeObserver(resize).observe(host);
+  window.addEventListener("pagehide", function () {
+    cancelAnimationFrame(frameId);
+    scene.traverse(function (object) {
+      if (object.geometry) object.geometry.dispose();
+      if (object.material) object.material.dispose();
+    });
+    renderer.dispose();
+  });
+  resize();
+  placeCamera();
+  applyAngles();
+  status.textContent = "Drag to orbit the camera; use the sliders or Demonstrate buttons.";
+  frameId = requestAnimationFrame(step);
+}
+
+function showSceneError(error) {
+  var status = document.getElementById("status");
+  var reason = error && error.message ? error.message : "unknown error";
+  status.textContent = "The 3D scene could not load (" + reason + "). The explanation above still applies.";
+  Array.from(document.querySelectorAll(".ap-controls input, .ap-controls button")).forEach(function (control) {
+    control.disabled = true;
+  });
+}
+(async () => {
+setupScene().catch(showSceneError);
+})();
+  </script>
+</body>
+</html>

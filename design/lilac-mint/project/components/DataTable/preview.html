@@ -1,0 +1,108 @@
+<!-- @dsCard group="Data" height=400 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DataTable</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+</style>
+</head>
+<body>
+  <div class="lm-table-wrap">
+    <table class="lm-table">
+      <caption>人員名冊（示意資料）· 生效日 <time datetime="2026-10-01">2026-10-01</time> · 已選 1 筆</caption>
+      <thead>
+        <tr>
+          <th class="lm-table__check" scope="col"><input type="checkbox" aria-label="全選本頁"></th>
+          <th scope="col" aria-sort="ascending">
+            <button type="button" class="lm-table__sort">GPN
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="lm-table__arrow-up" d="m7 9 5-5 5 5"/><path class="lm-table__arrow-down" d="m7 15 5 5 5-5"/></svg>
+            </button>
+          </th>
+          <th scope="col" aria-sort="none">
+            <button type="button" class="lm-table__sort">姓名
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="lm-table__arrow-up" d="m7 9 5-5 5 5"/><path class="lm-table__arrow-down" d="m7 15 5 5 5-5"/></svg>
+            </button>
+          </th>
+          <th scope="col">單位</th>
+          <th scope="col">職位</th>
+          <th scope="col" aria-sort="none">
+            <button type="button" class="lm-table__sort">生效期間
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="lm-table__arrow-up" d="m7 9 5-5 5 5"/><path class="lm-table__arrow-down" d="m7 15 5 5 5-5"/></svg>
+            </button>
+          </th>
+          <th scope="col">狀態</th>
+          <th scope="col" class="lm-table__num">FTE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="is-selected">
+          <td class="lm-table__check"><input type="checkbox" checked aria-label="選取 ZZ-000123"></td>
+          <td class="lm-table__mono">ZZ-000123</td>
+          <td class="lm-table__name">樣本·林晴</td>
+          <td>樣本營運部</td>
+          <td>工程師</td>
+          <td class="lm-table__range">[<time datetime="2026-01-01">2026-01-01</time>, ∞)</td>
+          <td><span class="lm-table__badge lm-table__badge--active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>在職</span></td>
+          <td class="lm-table__num">1.00</td>
+        </tr>
+        <tr>
+          <td class="lm-table__check"><input type="checkbox" aria-label="選取 ZZ-000124"></td>
+          <td class="lm-table__mono">ZZ-000124</td>
+          <td class="lm-table__name">樣本·陳霖</td>
+          <td>樣本資料部</td>
+          <td>經理</td>
+          <td class="lm-table__range">[<time datetime="2025-07-01">2025-07-01</time>, ∞)</td>
+          <td><span class="lm-table__badge lm-table__badge--active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>在職</span></td>
+          <td class="lm-table__num">1.00</td>
+        </tr>
+        <tr class="is-contingent">
+          <td class="lm-table__check"><input type="checkbox" aria-label="選取 ZZ-000207"></td>
+          <td class="lm-table__mono">ZZ-000207</td>
+          <td class="lm-table__name"><span class="lm-table__cell lm-table__cell--wrap">樣本·吳悅 <span class="lm-table__tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>派遣</span></span></td>
+          <td>樣本行政部</td>
+          <td>專員</td>
+          <td class="lm-table__range">[<time datetime="2026-03-01">2026-03-01</time>, <time datetime="2026-12-31">2026-12-31</time>)</td>
+          <td><span class="lm-table__badge lm-table__badge--contingent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>派遣</span></td>
+          <td class="lm-table__num">0.50</td>
+        </tr>
+        <tr class="is-frozen">
+          <td class="lm-table__check"><input type="checkbox" aria-label="選取 ZZ-000318"></td>
+          <td class="lm-table__mono">ZZ-000318</td>
+          <td class="lm-table__name"><span class="lm-table__cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>樣本·張衡</span></td>
+          <td>樣本製造部</td>
+          <td>課長</td>
+          <td class="lm-table__range">[<time datetime="2024-02-01">2024-02-01</time>, ∞)</td>
+          <td><span class="lm-table__badge lm-table__badge--frozen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>凍結</span></td>
+          <td class="lm-table__num">1.00</td>
+        </tr>
+        <tr>
+          <td class="lm-table__check"><input type="checkbox" aria-label="選取 ZZ-000455"></td>
+          <td class="lm-table__mono">ZZ-000455</td>
+          <td class="lm-table__name">樣本·黃薇</td>
+          <td>樣本人資部</td>
+          <td>專員</td>
+          <td class="lm-table__range">[<time datetime="2025-10-01">2025-10-01</time>, ∞)</td>
+          <td><span class="lm-table__badge lm-table__badge--merged"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><path d="M6 7v1a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4V7M12 12v5"/></svg>已合併</span></td>
+          <td class="lm-table__num">1.00</td>
+        </tr>
+        <tr>
+          <td class="lm-table__check"><input type="checkbox" aria-label="選取 ZZ-000512"></td>
+          <td class="lm-table__mono">ZZ-000512</td>
+          <td class="lm-table__name">樣本·劉安</td>
+          <td>樣本行銷部</td>
+          <td>副理</td>
+          <td class="lm-table__range">[<time datetime="2023-05-01">2023-05-01</time>, <time datetime="2026-09-30">2026-09-30</time>)</td>
+          <td><span class="lm-table__badge lm-table__badge--inactive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>離職</span></td>
+          <td class="lm-table__num">0.00</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

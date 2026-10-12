@@ -1,0 +1,66 @@
+<!-- @dsCard group="Inputs" height=180 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SearchBox</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4) var(--space-6); align-items: start; }
+  .demo-col { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); display: block; margin-bottom: var(--space-3); }
+</style>
+</head>
+<body>
+  <span class="lm-demo-label">左：輸入即更新筆數與清除鈕，按 <kbd>/</kbd> 聚焦；右：停用（示意資料）</span>
+  <div class="demo-grid">
+    <div class="demo-col">
+      <div class="lm-search" id="sb-demo">
+        <svg class="lm-search__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
+        <input class="lm-search__input" id="sb-input" type="search" placeholder="搜尋人名／單位／代碼" aria-label="搜尋人名、單位或代碼" aria-describedby="sb-status" autocomplete="off" spellcheck="false">
+        <button type="button" class="lm-search__clear" id="sb-clear" aria-label="清除搜尋" hidden>
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"/></svg>
+        </button>
+        <kbd class="lm-search__kbd" aria-hidden="true">/</kbd>
+      </div>
+      <p class="lm-search__status" id="sb-status" role="status" aria-live="polite">輸入關鍵字後顯示筆數。</p>
+    </div>
+    <div class="demo-col">
+      <div class="lm-search">
+        <svg class="lm-search__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
+        <input class="lm-search__input" type="search" placeholder="索引建立中…" aria-label="搜尋（索引建立中）" disabled>
+      </div>
+      <p class="lm-search__status">索引建立完成後可搜尋。</p>
+    </div>
+  </div>
+  <script>
+    // 示範：合成索引；輸入時更新 role="status" 的筆數、切換清除鈕與 / 提示；按 / 聚焦
+    var box = document.getElementById('sb-demo');
+    var input = document.getElementById('sb-input');
+    var clear = document.getElementById('sb-clear');
+    var statusEl = document.getElementById('sb-status');
+    var INDEX = ['樣本·林 ZZ-000123 樣本事業群', '樣本·陳 ZZ-000124 樣本部', '樣本·黃 ZZ-000125 樣本部', '樣本·張 ZZ-000126 樣本課', 'Sample Lee ZZ-000127 樣本課', '樣本事業群', '樣本部', '樣本課'];
+    function update() {
+      var q = input.value.trim().toLowerCase();
+      var has = q.length > 0;
+      box.classList.toggle('has-value', has);
+      clear.hidden = !has;
+      if (!has) { statusEl.textContent = '輸入關鍵字後顯示筆數。'; return; }
+      var n = INDEX.filter(function (row) { return row.toLowerCase().indexOf(q) !== -1; }).length;
+      statusEl.textContent = n ? '找到 ' + n + ' 筆，↑↓ 選取、Enter 開啟。' : '找不到符合「' + input.value.trim() + '」的人員或單位。';
+    }
+    input.addEventListener('input', update);
+    clear.addEventListener('click', function () { input.value = ''; update(); input.focus(); });
+    document.addEventListener('keydown', function (event) {
+      var tag = (event.target.tagName || '').toLowerCase();
+      if (event.key === '/' && tag !== 'input' && tag !== 'textarea' && tag !== 'select') { event.preventDefault(); input.focus(); }
+      if (event.key === 'Escape' && event.target === input) { input.value = ''; update(); }
+    });
+    update();
+  </script>
+</body>
+</html>

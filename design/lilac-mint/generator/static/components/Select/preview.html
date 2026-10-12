@@ -1,0 +1,64 @@
+<!-- @dsCard group="Inputs" height=200 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Select</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); align-items: start; }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); display: block; margin-bottom: var(--space-3); }
+</style>
+</head>
+<body>
+  <span class="lm-demo-label">狀態：預設（含「請選擇」空值）／錯誤／停用（示意資料）</span>
+  <div class="demo-grid">
+    <div class="lm-field">
+      <label class="lm-field__label" for="sel-status">草稿狀態</label>
+      <div class="lm-select">
+        <select class="lm-select__native" id="sel-status" aria-describedby="sel-status-help">
+          <option value="">請選擇</option>
+          <option value="draft">draft（草稿）</option>
+          <option value="validated">validated（已驗證）</option>
+          <option value="scheduled">scheduled（已排程）</option>
+          <option value="applied">applied（已生效）</option>
+          <option value="cancelled">cancelled（已取消）</option>
+        </select>
+        <svg class="lm-select__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+      </div>
+      <p class="lm-field__help" id="sel-status-help">篩選草稿清單。</p>
+    </div>
+    <div class="lm-field">
+      <label class="lm-field__label" for="sel-unit">生效單位 <span class="lm-field__required" aria-hidden="true">*</span><span class="lm-sr-only">（必填）</span></label>
+      <div class="lm-select">
+        <select class="lm-select__native" id="sel-unit" required aria-invalid="true" aria-describedby="sel-unit-err">
+          <option value="" selected>請選擇</option>
+          <option value="bg">樣本事業群</option>
+          <option value="dept">樣本部</option>
+          <option value="sec">樣本課</option>
+        </select>
+        <svg class="lm-select__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+      </div>
+      <p class="lm-field__error" id="sel-unit-err" role="alert">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5M8 11h.01"/></svg>
+        請選擇生效單位。
+      </p>
+    </div>
+    <div class="lm-field is-disabled">
+      <label class="lm-field__label" for="sel-version">版本</label>
+      <div class="lm-select">
+        <select class="lm-select__native" id="sel-version" disabled aria-describedby="sel-version-help">
+          <option value="current" selected>目前版本</option>
+          <option value="draft">草稿</option>
+        </select>
+        <svg class="lm-select__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+      </div>
+      <p class="lm-field__help" id="sel-version-help">只有一個版本時不可切換。</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "v": 3,
+  "layout": "files",
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-11T09:49:25.583Z"
+  },
+  "title": "Lilac Mint",
+  "namespace": "LilacMint",
+  "libraries": [],
+  "sections": {},
+  "groups": [],
+  "assetGroups": {},
+  "blobs": {},
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "lastChange": {
+    "by": "Kiel",
+    "at": "2026-10-11T09:49:25.583Z",
+    "via": "GitHub · kielchang/OpenIntelligentUI@6117c2a",
+    "note": "initial build from OpenIntelligentUI styles, design-system package and gallery analysis"
+  }
+}

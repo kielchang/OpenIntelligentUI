@@ -1,0 +1,92 @@
+<!-- @dsCard group="Feedback" height=470 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alert</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-3) var(--space-4); align-items: start; }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); margin: 0; }
+</style>
+</head>
+<body>
+  <div class="demo-grid">
+    <p class="lm-demo-label">低強度（日常提示；合規建議永遠用這一層）</p>
+    <p class="lm-demo-label">高強度（只給 modal／critical）</p>
+
+    <div class="lm-alert lm-alert--info" role="status">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <div class="lm-alert__body">
+        <strong class="lm-alert__title">合規建議</strong>
+        <p class="lm-alert__text">主管職位有兩個，建議保留一個；需法務確認。</p>
+        <a class="lm-alert__action" href="#advice">查看建議</a>
+      </div>
+      <button type="button" class="lm-alert__close" aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="lm-alert lm-alert--info lm-alert--high" role="status">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <div class="lm-alert__body">
+        <strong class="lm-alert__title">系統維護</strong>
+        <p class="lm-alert__text">DOOPING 22:00 起進入唯讀模式。</p>
+      </div>
+      <button type="button" class="lm-alert__close" aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+
+    <div class="lm-alert lm-alert--success" role="status">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      <div class="lm-alert__body">
+        <strong class="lm-alert__title">草稿已套用</strong>
+        <p class="lm-alert__text">12 筆變更已於 2026-10-01 生效。</p>
+      </div>
+      <button type="button" class="lm-alert__close" aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="lm-alert lm-alert--success lm-alert--high" role="status">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      <div class="lm-alert__body">
+        <strong class="lm-alert__title">排程完成</strong>
+        <p class="lm-alert__text">草稿已排程，生效日 2026-11-01。</p>
+      </div>
+    </div>
+
+    <div class="lm-alert lm-alert--warning" role="status">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+      <div class="lm-alert__body">
+        <strong class="lm-alert__title">生效日早於今天</strong>
+        <p class="lm-alert__text">排程日 2026-09-01 會回溯歷史。</p>
+        <a class="lm-alert__action" href="#date">調整生效日</a>
+      </div>
+      <button type="button" class="lm-alert__close" aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="lm-alert lm-alert--warning lm-alert--high" role="status">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+      <div class="lm-alert__body">
+        <strong class="lm-alert__title">單位即將凍結</strong>
+        <p class="lm-alert__text">樣本製造部 2026-12-31 起凍結。</p>
+      </div>
+    </div>
+
+    <div class="lm-alert lm-alert--danger" role="alert">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6M9 9l6 6"/></svg>
+      <div class="lm-alert__body">
+        <strong class="lm-alert__title">驗證失敗</strong>
+        <p class="lm-alert__text">ZZ-000207 的匯報線形成循環，無法排程。</p>
+        <a class="lm-alert__action" href="#errors">查看錯誤</a>
+      </div>
+      <button type="button" class="lm-alert__close" aria-label="關閉"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="lm-alert lm-alert--danger lm-alert--high" role="alert">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6M9 9l6 6"/></svg>
+      <div class="lm-alert__body">
+        <strong class="lm-alert__title">連線中斷</strong>
+        <p class="lm-alert__text">草稿尚未儲存，請勿關閉視窗。</p>
+        <a class="lm-alert__action" href="#retry">重新連線</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!-- @dsCard group="Inputs" height=260 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NumberField</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); align-items: start; }
+  .demo-result { margin-top: var(--space-4); padding: var(--space-3) var(--space-4); border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--surface-primary); }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); display: block; margin-bottom: var(--space-3); }
+</style>
+</head>
+<body>
+  <span class="lm-demo-label">預算試算（示意資料）：改數值即時驗證範圍並換算；右欄為停用</span>
+  <div class="demo-grid">
+    <div class="lm-field">
+      <label class="lm-field__label" for="nf-fte">核定員額（FTE）</label>
+      <div class="lm-input-group">
+        <input class="lm-input lm-input--number" id="nf-fte" type="number" inputmode="decimal" min="0" max="50" step="0.5" value="12.5" aria-describedby="nf-fte-help nf-fte-err">
+        <span class="lm-input-group__affix" aria-hidden="true">人</span>
+      </div>
+      <p class="lm-field__help" id="nf-fte-help">0–50，以 0.5 為一級。</p>
+      <p class="lm-field__error" id="nf-fte-err" role="alert" hidden></p>
+    </div>
+    <div class="lm-field">
+      <label class="lm-field__label" for="nf-rate">每人年單價</label>
+      <div class="lm-input-group">
+        <input class="lm-input lm-input--number" id="nf-rate" type="number" inputmode="decimal" min="1" max="5000000" step="1" value="960000" aria-describedby="nf-rate-help nf-rate-err">
+        <span class="lm-input-group__affix" aria-hidden="true">元</span>
+      </div>
+      <p class="lm-field__help" id="nf-rate-help">整數，1–5,000,000。</p>
+      <p class="lm-field__error" id="nf-rate-err" role="alert" hidden></p>
+    </div>
+    <div class="lm-field is-disabled">
+      <label class="lm-field__label" for="nf-cap">派遣／約聘上限</label>
+      <div class="lm-input-group">
+        <input class="lm-input lm-input--number" id="nf-cap" type="number" inputmode="decimal" value="3" disabled aria-describedby="nf-cap-help">
+        <span class="lm-input-group__affix" aria-hidden="true">人</span>
+      </div>
+      <p class="lm-field__help" id="nf-cap-help">由合規設定決定。</p>
+    </div>
+  </div>
+  <p class="demo-result lm-field__status" id="nf-result" role="status" aria-live="polite"></p>
+  <script>
+    // 示範：valueAsNumber + Number.isFinite + min/max 範圍檢查，結果寫到 role="status"
+    var fte = document.getElementById('nf-fte');
+    var rate = document.getElementById('nf-rate');
+    var result = document.getElementById('nf-result');
+    var ERROR_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5M8 11h.01"/></svg>';
+    function check(input) {
+      var err = document.getElementById(input.id + '-err');
+      var n = input.valueAsNumber;
+      var min = Number(input.min), max = Number(input.max), step = Number(input.step) || 1;
+      var message = '';
+      if (input.value.trim() === '') message = '請輸入數字。';
+      else if (!Number.isFinite(n)) message = '只能輸入數字。';
+      else if (n < min || n > max) message = '必須介於 ' + min.toLocaleString('zh-Hant') + ' 與 ' + max.toLocaleString('zh-Hant') + ' 之間。';
+      else if (Math.abs(n / step - Math.round(n / step)) > 1e-9) message = '必須是 ' + step + ' 的倍數。';
+      input.setAttribute('aria-invalid', message ? 'true' : 'false');
+      err.hidden = !message;
+      err.innerHTML = message ? ERROR_ICON + '<span>' + message + '</span>' : '';
+      return message ? NaN : n;
+    }
+    function update() {
+      var a = check(fte), b = check(rate);
+      if (Number.isFinite(a) && Number.isFinite(b)) {
+        result.innerHTML = '預估年人事預算：<strong>' + Math.round(a * b).toLocaleString('zh-Hant') + '</strong> 元（' + a + ' 人 × ' + b.toLocaleString('zh-Hant') + ' 元）';
+      } else {
+        result.textContent = '請先修正欄位中的錯誤，再看換算結果。';
+      }
+    }
+    fte.addEventListener('input', update);
+    rate.addEventListener('input', update);
+    update();
+  </script>
+</body>
+</html>

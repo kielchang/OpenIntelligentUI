@@ -1,0 +1,99 @@
+<!-- @dsCard group="OrgChart" height=420 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OrgChartNode</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-3) var(--space-4); }
+  .lm-demo-label { display: block; font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); margin-bottom: var(--space-1); }
+  .demo-row { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-6); align-items: flex-start; margin-top: var(--space-2); }
+  .demo-cell { display: flex; flex-direction: column; gap: var(--space-2); }
+  .demo-cell .lm-demo-label { margin: 0; }
+</style>
+</head>
+<body>
+  <span class="lm-demo-label">實線＝正式匯報、虛線＝虛線匯報；主管節點展開（−），第一個子節點折疊（+5）</span>
+  <div class="lm-org-tree">
+    <div class="lm-org-tree__root">
+      <div class="lm-org-node" data-code="ZZ-000123">
+        <div class="lm-org-node__name">樣本·美玲</div>
+        <div class="lm-org-node__title">事業群總經理</div>
+        <div class="lm-org-node__unit">樣本事業群</div>
+        <div class="lm-org-node__meta">
+          <span class="lm-org-node__manager"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7Z"/><path d="M5 20h14"/></svg>主管</span>
+          <span class="lm-org-node__chip">派遣 2</span>
+        </div>
+        <button type="button" class="lm-org-node__toggle" aria-expanded="true" aria-label="收合 3 位直屬">−</button>
+      </div>
+    </div>
+    <ul class="lm-org-tree__children">
+      <li class="lm-org-tree__child">
+        <div class="lm-org-node" data-code="ZZ-000456">
+          <div class="lm-org-node__name">樣本·志明</div>
+          <div class="lm-org-node__title">部門經理</div>
+          <div class="lm-org-node__unit">樣本事業群／樣本部</div>
+          <div class="lm-org-node__meta">
+            <span class="lm-org-node__manager"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7Z"/><path d="M5 20h14"/></svg>主管</span>
+          </div>
+          <button type="button" class="lm-org-node__toggle" aria-expanded="false" aria-label="展開 5 位直屬">+5</button>
+        </div>
+      </li>
+      <li class="lm-org-tree__child">
+        <div class="lm-org-node is-vacant">
+          <div class="lm-org-node__name">空缺</div>
+          <div class="lm-org-node__title">專案經理</div>
+          <div class="lm-org-node__unit">樣本事業群／樣本部</div>
+          <div class="lm-org-node__meta">
+            <span class="lm-org-node__tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/></svg>空缺職位</span>
+          </div>
+        </div>
+      </li>
+      <li class="lm-org-tree__child lm-org-tree__child--dotted">
+        <div class="lm-org-node lm-org-node--dotted" data-code="ZZ-000789">
+          <div class="lm-org-node__name">樣本·佳穎</div>
+          <div class="lm-org-node__title">法務專員</div>
+          <div class="lm-org-node__unit">樣本法務部</div>
+          <div class="lm-org-node__meta">
+            <span class="lm-org-node__tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 3" aria-hidden="true"><path d="M3 12h18"/></svg>虛線匯報</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="demo-row">
+    <div class="demo-cell">
+      <span class="lm-demo-label">凍結（.is-frozen）</span>
+      <div class="lm-org-node is-frozen">
+        <div class="lm-org-node__name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>樣本法務部二組</div>
+        <div class="lm-org-node__title">單位 · frozen</div>
+        <div class="lm-org-node__meta">
+          <span class="lm-org-node__tag">凍結，不可指派</span>
+        </div>
+      </div>
+    </div>
+    <div class="demo-cell">
+      <span class="lm-demo-label">搜尋命中（.is-highlighted）</span>
+      <div class="lm-org-node is-highlighted" data-code="ZZ-000321">
+        <div class="lm-org-node__name">樣本·家豪</div>
+        <div class="lm-org-node__title">資料分析師</div>
+        <div class="lm-org-node__unit">樣本資訊部</div>
+      </div>
+    </div>
+    <div class="demo-cell">
+      <span class="lm-demo-label">草稿變更（.is-draft）</span>
+      <div class="lm-org-node is-draft" data-code="ZZ-000654">
+        <span class="lm-org-node__corner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4Z"/></svg>草稿</span>
+        <div class="lm-org-node__name">樣本·怡君</div>
+        <div class="lm-org-node__title">資深工程師</div>
+        <div class="lm-org-node__unit">樣本研發一部 ← 樣本部</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

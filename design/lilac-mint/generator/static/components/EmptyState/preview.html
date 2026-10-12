@@ -1,0 +1,51 @@
+<!-- @dsCard group="Feedback" height=300 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EmptyState</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); }
+  .demo-card { border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--surface-primary); }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); margin: 0 0 var(--space-2); }
+</style>
+</head>
+<body>
+  <p class="lm-demo-label">沒有資料 ／ 沒有符合篩選的結果 ／ 沒有權限</p>
+  <div class="demo-grid">
+    <div class="demo-card">
+      <div class="lm-empty">
+        <svg class="lm-empty__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13h5l2 3h4l2-3h5"/><path d="M5 5h14l2 8v6H3v-6z"/></svg>
+        <h3 class="lm-empty__title">還沒有人員資料</h3>
+        <p class="lm-empty__text">從 SMERP 匯入或建立第一筆草稿後，名冊會顯示在這裡。</p>
+        <div class="lm-empty__actions">
+          <button type="button" class="lm-empty__btn">新增草稿</button>
+          <a class="lm-empty__link" href="#import">了解匯入流程</a>
+        </div>
+      </div>
+    </div>
+    <div class="demo-card">
+      <div class="lm-empty">
+        <svg class="lm-empty__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M8.5 8.5l5 5M13.5 8.5l-5 5"/></svg>
+        <h3 class="lm-empty__title">沒有符合的結果</h3>
+        <p class="lm-empty__text">試著放寬生效日，或移除部分篩選條件。</p>
+        <div class="lm-empty__actions">
+          <button type="button" class="lm-empty__btn">清除篩選</button>
+        </div>
+      </div>
+    </div>
+    <div class="demo-card">
+      <div class="lm-empty">
+        <svg class="lm-empty__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        <h3 class="lm-empty__title">沒有檢視權限</h3>
+        <p class="lm-empty__text">你目前的角色無法檢視這個法人的名冊，請向管理員申請。</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

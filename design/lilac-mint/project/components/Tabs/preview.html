@@ -1,0 +1,54 @@
+<!-- @dsCard group="Layout" height=240 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tabs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-3) var(--space-4); }
+  .lm-demo-label { display: block; font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); margin-bottom: var(--space-2); }
+  .demo-surface { background: var(--surface-primary); border: 1px solid var(--border-default); border-radius: var(--radius-lg); }
+  .demo-surface .lm-tabs__list { padding: 0 var(--space-3); }
+</style>
+</head>
+<body>
+  <span class="lm-demo-label">底線式分頁；tab 可帶計數 chip；鍵盤 ← → Home End 切換</span>
+  <div class="demo-surface">
+    <div class="lm-tabs" data-lm-tabs>
+      <div class="lm-tabs__list" role="tablist" aria-label="草稿狀態">
+        <button type="button" class="lm-tab" role="tab" id="tab-all" aria-controls="panel-all" aria-selected="true">全部 <span class="lm-tab__count">12</span></button>
+        <button type="button" class="lm-tab" role="tab" id="tab-draft" aria-controls="panel-draft" aria-selected="false">草稿 <span class="lm-tab__count">3</span></button>
+        <button type="button" class="lm-tab" role="tab" id="tab-scheduled" aria-controls="panel-scheduled" aria-selected="false">已排程 <span class="lm-tab__count">2</span></button>
+        <button type="button" class="lm-tab" role="tab" id="tab-applied" aria-controls="panel-applied" aria-selected="false">已生效 <span class="lm-tab__count">7</span></button>
+        <button type="button" class="lm-tab" role="tab" id="tab-cancelled" aria-controls="panel-cancelled" aria-selected="false" disabled>已取消</button>
+      </div>
+      <div class="lm-tabs__panel" role="tabpanel" id="panel-all" aria-labelledby="tab-all" tabindex="0">
+        <div class="lm-tabs__list-item"><span>D-0042 · 樣本部搬移至樣本事業群</span><span>已驗證 · 樣本·美玲</span></div>
+        <div class="lm-tabs__list-item"><span>D-0041 · 新增職位：資料分析師</span><span>已排程 · 2026-11-01</span></div>
+        <div class="lm-tabs__list-item"><span>D-0039 · 凍結樣本法務部二組</span><span>已生效 · 2026-10-01</span></div>
+      </div>
+      <div class="lm-tabs__panel" role="tabpanel" id="panel-draft" aria-labelledby="tab-draft" tabindex="0" hidden>
+        <div class="lm-tabs__list-item"><span>D-0042 · 樣本部搬移至樣本事業群</span><span>已驗證 · 樣本·美玲</span></div>
+        <div class="lm-tabs__list-item"><span>D-0043 · 更名：樣本研發一部</span><span>草稿 · 樣本·志明</span></div>
+        <div class="lm-tabs__list-item"><span>D-0044 · 結束任職：ZZ-000456</span><span>草稿 · 樣本·佳穎</span></div>
+      </div>
+      <div class="lm-tabs__panel" role="tabpanel" id="panel-scheduled" aria-labelledby="tab-scheduled" tabindex="0" hidden>
+        <div class="lm-tabs__list-item"><span>D-0041 · 新增職位：資料分析師</span><span>已排程 · 2026-11-01</span></div>
+        <div class="lm-tabs__list-item"><span>D-0040 · 指派主管：樣本製造部</span><span>已排程 · 2026-11-15</span></div>
+      </div>
+      <div class="lm-tabs__panel" role="tabpanel" id="panel-applied" aria-labelledby="tab-applied" tabindex="0" hidden>
+        <div class="lm-tabs__list-item"><span>D-0039 · 凍結樣本法務部二組</span><span>已生效 · 2026-10-01</span></div>
+        <div class="lm-tabs__list-item"><span>D-0038 · 搬移：樣本資訊部</span><span>已生效 · 2026-09-01</span></div>
+        <div class="lm-tabs__list-item"><span>其餘 5 筆</span><span>示意資料</span></div>
+      </div>
+      <div class="lm-tabs__panel" role="tabpanel" id="panel-cancelled" aria-labelledby="tab-cancelled" tabindex="0" hidden>
+        <p class="lm-tabs__empty">沒有已取消的草稿。</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

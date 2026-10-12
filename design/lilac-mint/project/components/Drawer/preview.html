@@ -1,0 +1,115 @@
+<!-- @dsCard group="Layout" height=340 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drawer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-3) var(--space-4); }
+  .demo-row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; margin-bottom: var(--space-3); }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); }
+  .demo-stage { border: 1px dashed var(--border-hover); border-radius: var(--radius-lg); overflow: hidden; }
+</style>
+</head>
+<body>
+  <div class="demo-row">
+    <button type="button" class="lm-drawer__btn lm-drawer__btn--primary" data-lm-drawer-open="drawer-demo">開啟抽屜</button>
+    <span class="lm-demo-label">右側抽屜 420px；下方為同一面板的內嵌展示（`.lm-drawer--inline`）</span>
+  </div>
+
+  <div class="demo-stage">
+    <div class="lm-drawer lm-drawer--inline">
+      <div class="lm-drawer__backdrop"></div>
+      <section class="lm-drawer__panel" aria-label="人員細節（內嵌展示）">
+        <div class="lm-drawer__header">
+          <div>
+            <h2 class="lm-drawer__title">樣本·美玲</h2>
+            <p class="lm-drawer__subtitle">ZZ-000123 · 在職</p>
+          </div>
+          <button type="button" class="lm-drawer__close" aria-label="關閉">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <div class="lm-drawer__body">
+          <p class="lm-drawer__section">目前任職</p>
+          <dl class="lm-drawer__dl">
+            <dt>職位</dt><dd>資深經理</dd>
+            <dt>單位</dt><dd>樣本事業群／樣本部</dd>
+            <dt>主管</dt><dd>樣本·志明</dd>
+            <dt>生效期間</dt><dd>2024-03-01 起</dd>
+          </dl>
+          <p class="lm-drawer__section">聯絡</p>
+          <dl class="lm-drawer__dl">
+            <dt>信箱</dt><dd>meiling@example.invalid</dd>
+          </dl>
+        </div>
+        <div class="lm-drawer__footer">
+          <button type="button" class="lm-drawer__btn">關閉</button>
+          <button type="button" class="lm-drawer__btn lm-drawer__btn--primary">編輯任職</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- 真抽屜：只由上方按鈕開啟 -->
+  <div class="lm-drawer" id="drawer-demo" aria-hidden="true">
+    <div class="lm-drawer__backdrop" data-lm-drawer-close></div>
+    <section class="lm-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawer-demo-title">
+      <div class="lm-drawer__header">
+        <div>
+          <h2 class="lm-drawer__title" id="drawer-demo-title">樣本·美玲</h2>
+          <p class="lm-drawer__subtitle">ZZ-000123 · 在職</p>
+        </div>
+        <button type="button" class="lm-drawer__close" aria-label="關閉" data-lm-drawer-close>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="lm-drawer__body">
+        <p class="lm-drawer__section">目前任職</p>
+        <dl class="lm-drawer__dl">
+          <dt>職位</dt><dd>資深經理</dd>
+          <dt>單位</dt><dd>樣本事業群／樣本部</dd>
+          <dt>主管</dt><dd>樣本·志明</dd>
+          <dt>生效期間</dt><dd>2024-03-01 起</dd>
+        </dl>
+        <p class="lm-drawer__section">聯絡</p>
+        <dl class="lm-drawer__dl">
+          <dt>信箱</dt><dd>meiling@example.invalid</dd>
+        </dl>
+        <p class="lm-drawer__section">任職歷程</p>
+        <dl class="lm-drawer__dl">
+          <dt>2024-03-01</dt><dd>升任資深經理（樣本部）</dd>
+          <dt>2021-07-01</dt><dd>到職：專員（樣本部）</dd>
+        </dl>
+        <p class="lm-demo-label">示意資料</p>
+      </div>
+      <div class="lm-drawer__footer">
+        <button type="button" class="lm-drawer__btn" data-lm-drawer-close>關閉</button>
+        <button type="button" class="lm-drawer__btn lm-drawer__btn--primary" data-lm-drawer-close>編輯任職</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      var drawer = document.getElementById("drawer-demo");
+      var opener = document.querySelector('[data-lm-drawer-open="drawer-demo"]');
+      if (!drawer) return;
+      // Esc 關閉並把焦點還給開啟按鈕；開啟本身由 bundle.js 的 data-lm-drawer-open 接線
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && drawer.classList.contains("is-open")) {
+          window.LilacMint.drawer.close(drawer);
+          if (opener) opener.focus();
+        }
+      });
+      drawer.addEventListener("click", function (e) {
+        if (e.target.closest && e.target.closest("[data-lm-drawer-close]") && opener) window.setTimeout(function () { opener.focus(); }, 0);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!-- @dsCard group="Inputs" height=200 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RangeSlider</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4) var(--space-6); align-items: start; }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); display: block; margin-bottom: var(--space-3); }
+</style>
+</head>
+<body>
+  <span class="lm-demo-label">拖動左側滑桿即時更新數值與換算；右側為停用（示意資料）</span>
+  <div class="demo-grid">
+    <div class="lm-field lm-range">
+      <label class="lm-field__label" for="rs-depth">顯示層級深度</label>
+      <div class="lm-range__row">
+        <input class="lm-range__input" id="rs-depth" type="range" min="1" max="8" step="1" value="3" aria-describedby="rs-depth-help">
+        <output class="lm-range__output" for="rs-depth" id="rs-depth-out">3</output>
+      </div>
+      <div class="lm-range__ticks" aria-hidden="true"><span>1 層</span><span>8 層</span></div>
+      <p class="lm-field__help" id="rs-depth-help">目前展開到第 <strong id="rs-depth-text">3</strong> 層，約顯示 <strong id="rs-depth-count">27</strong> 個單位。</p>
+    </div>
+    <div class="lm-field lm-range is-disabled">
+      <label class="lm-field__label" for="rs-zoom">縮放</label>
+      <div class="lm-range__row">
+        <input class="lm-range__input" id="rs-zoom" type="range" min="50" max="200" step="10" value="100" disabled aria-describedby="rs-zoom-help">
+        <output class="lm-range__output" for="rs-zoom">100%</output>
+      </div>
+      <div class="lm-range__ticks" aria-hidden="true"><span>50%</span><span>200%</span></div>
+      <p class="lm-field__help" id="rs-zoom-help">列印預覽時固定 100%。</p>
+    </div>
+  </div>
+  <script>
+    // 示範：output 即時跟著值走；換算用 3 的冪次模擬每層單位數
+    var depth = document.getElementById('rs-depth');
+    var out = document.getElementById('rs-depth-out');
+    var text = document.getElementById('rs-depth-text');
+    var count = document.getElementById('rs-depth-count');
+    function update() {
+      var n = depth.valueAsNumber;
+      out.value = String(n);
+      text.textContent = String(n);
+      count.textContent = Math.pow(3, n).toLocaleString('zh-Hant');
+    }
+    depth.addEventListener('input', update);
+    update();
+  </script>
+</body>
+</html>

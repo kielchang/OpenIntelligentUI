@@ -1,0 +1,87 @@
+/* ── 10 actions ── */
+
+/* Button */
+.lm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-primary);
+  font: 500 13px/1.4 var(--font-sans);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+.lm-btn--sm { min-height: 28px; padding: 3px 10px; font-size: 12px; }
+.lm-btn--icon { width: 36px; padding: 0; }
+.lm-btn--icon.lm-btn--sm { width: 28px; }
+.lm-btn__icon { width: 16px; height: 16px; flex: none; }
+.lm-btn__spinner { width: 16px; height: 16px; flex: none; }
+
+/* 變體 */
+.lm-btn--primary { background: var(--text-primary); border-color: var(--text-primary); color: var(--background); }
+.lm-btn--primary:hover:not(:disabled):not([aria-busy="true"]) {
+  background: color-mix(in srgb, var(--text-primary) 88%, var(--background));
+  border-color: color-mix(in srgb, var(--text-primary) 88%, var(--background));
+}
+.lm-btn--secondary { background: var(--surface-btn); border-color: var(--border-default); color: var(--text-primary); }
+.lm-btn--secondary:hover:not(:disabled):not([aria-busy="true"]) { background: var(--surface-btn-hover); border-color: var(--border-hover); }
+.lm-btn--ghost { background: transparent; color: var(--text-primary); }
+.lm-btn--ghost:hover:not(:disabled):not([aria-busy="true"]) { background: var(--surface-quaternary); }
+.lm-btn--danger { background: var(--sandbox-text-danger); border-color: var(--sandbox-text-danger); color: var(--sandbox-background-primary); }
+.lm-btn--danger:hover:not(:disabled):not([aria-busy="true"]) {
+  background: color-mix(in srgb, var(--sandbox-text-danger) 88%, var(--sandbox-background-primary));
+  border-color: color-mix(in srgb, var(--sandbox-text-danger) 88%, var(--sandbox-background-primary));
+}
+.lm-btn--brand { background: linear-gradient(135deg, var(--color-lilac), var(--color-mint)); border-color: transparent; color: var(--on-brand); }
+.lm-btn--brand:hover:not(:disabled):not([aria-busy="true"]) { box-shadow: var(--shadow-md); }
+
+/* 狀態 */
+.lm-btn:active:not(:disabled):not([aria-busy="true"]) { transform: translateY(1px); }
+.lm-btn:disabled, .lm-btn[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+.lm-btn[aria-busy="true"] { cursor: progress; }
+
+/* SegmentedControl */
+.lm-seg {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--surface-quaternary);
+}
+.lm-seg__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 4px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font: 500 13px/1.4 var(--font-sans);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+.lm-seg__btn:hover:not(:disabled):not([aria-pressed="true"]) { color: var(--text-primary); }
+.lm-seg__btn[aria-pressed="true"] { background: var(--surface-primary); border-color: var(--border-default); color: var(--text-primary); box-shadow: var(--shadow-sm); }
+/* 深色主題：surface-primary 疊在軌道上幾乎看不出來，改用較亮的按鈕 hover 面（來源 gallery.css 的 dark 覆寫也是提高亮度） */
+[data-theme="dark"] .lm-seg__btn[aria-pressed="true"] { background: var(--surface-btn-hover); }
+.lm-seg__btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.lm-seg__icon { width: 16px; height: 16px; flex: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lm-btn { transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease, transform 80ms ease; }
+  .lm-seg__btn { transition: background-color 120ms ease, color 120ms ease; }
+  .lm-btn__spinner { animation: lm-spin 800ms linear infinite; }
+  @keyframes lm-spin { to { transform: rotate(360deg); } }
+}

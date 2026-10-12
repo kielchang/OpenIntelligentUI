@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lilac Mint · 本機預覽</title>
+<script>(function(){var t=new URLSearchParams(location.search).get("theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";}document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="stylesheet" href="../project/tokens.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); }
+  .top { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; justify-content: space-between; padding: var(--space-3) var(--space-4); background: var(--background); border-bottom: 1px solid var(--border-default); }
+  .top h1 { margin: 0; font-size: 16px; font-weight: 700; letter-spacing: -0.4px; }
+  .seg { display: inline-flex; gap: 2px; padding: 2px; border-radius: var(--radius-md); background: var(--surface-quaternary); }
+  .seg button { font: 500 13px/1 var(--font-sans); padding: 6px 12px; border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--text-secondary); cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--surface-primary); color: var(--text-primary); box-shadow: var(--shadow-sm); }
+  main { max-width: 1040px; margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); }
+  nav.toc { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-6); font-size: 13px; }
+  nav.toc a { color: var(--text-secondary); text-decoration: none; padding: 4px 10px; border: 1px solid var(--border-default); border-radius: var(--radius-sm); }
+  nav.toc a:hover { color: var(--text-primary); border-color: var(--border-hover); }
+  .docs { font-size: 13px; color: var(--text-secondary); margin: 0 0 var(--space-6); }
+  .docs a { color: var(--text-primary); }
+  h2 { font-size: 15px; font-weight: 600; margin: var(--space-8) 0 var(--space-3); }
+  figure { margin: 0 0 var(--space-4); border: 1px solid var(--border-default); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface-primary); }
+  figcaption { display: flex; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) var(--space-4); font-size: 13px; font-weight: 600; border-bottom: 1px solid var(--border-default); }
+  figcaption a { font-weight: 400; color: var(--text-secondary); }
+  iframe { display: block; width: 100%; border: 0; }
+  .cover-wrap { overflow-x: auto; }
+  .cover-wrap iframe { width: 960px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Lilac Mint · 本機預覽</h1>
+  <div class="seg" role="group" aria-label="主題">
+    <button type="button" data-set="light">淺色</button><button type="button" data-set="dark">深色</button><button type="button" data-set="system">跟隨系統</button>
+  </div>
+</header>
+<main>
+  <p class="docs">品牌書與章節：<a href="../project/README.md">README.md</a>、<a href="../project/01-design-method.md">01-design-method.md</a>、<a href="../project/02-presentation-rules.md">02-presentation-rules.md</a>、<a href="../project/03-guardrails.md">03-guardrails.md</a>、<a href="../project/04-coverage-acceptance.md">04-coverage-acceptance.md</a>、<a href="../project/05-color-governance.md">05-color-governance.md</a>（在 GitHub 上會渲染成 Markdown）。每張卡片是一個元件的實況預覽，樣式來自 <code>project/tokens.css</code> 與 <code>project/components/bundle.css</code>。</p>
+  <nav class="toc"><a href="#g-Actions">Actions</a><a href="#g-Inputs">Inputs</a><a href="#g-Data">Data</a><a href="#g-Feedback">Feedback</a><a href="#g-Layout">Layout</a><a href="#g-Charts">Charts</a><a href="#g-Diagram">Diagram</a><a href="#g-OrgChart">OrgChart</a></nav>
+  <figure><figcaption>Cover<a href="Cover.html">單獨開啟</a></figcaption><div class="cover-wrap"><iframe data-src="Cover.html" title="Cover" style="height:288px" loading="lazy"></iframe></div></figure>
+  <h2 id="g-Actions">Actions</h2>
+  <figure id="Button"><figcaption>Button<span><a href="../project/components/Button/README.md">README</a> · <a href="Button.html">單獨開啟</a></span></figcaption><iframe data-src="Button.html" title="Button" style="height:260px" loading="lazy"></iframe></figure>
+  <figure id="SegmentedControl"><figcaption>SegmentedControl<span><a href="../project/components/SegmentedControl/README.md">README</a> · <a href="SegmentedControl.html">單獨開啟</a></span></figcaption><iframe data-src="SegmentedControl.html" title="SegmentedControl" style="height:200px" loading="lazy"></iframe></figure>
+  <h2 id="g-Inputs">Inputs</h2>
+  <figure id="TextField"><figcaption>TextField<span><a href="../project/components/TextField/README.md">README</a> · <a href="TextField.html">單獨開啟</a></span></figcaption><iframe data-src="TextField.html" title="TextField" style="height:330px" loading="lazy"></iframe></figure>
+  <figure id="NumberField"><figcaption>NumberField<span><a href="../project/components/NumberField/README.md">README</a> · <a href="NumberField.html">單獨開啟</a></span></figcaption><iframe data-src="NumberField.html" title="NumberField" style="height:260px" loading="lazy"></iframe></figure>
+  <figure id="Select"><figcaption>Select<span><a href="../project/components/Select/README.md">README</a> · <a href="Select.html">單獨開啟</a></span></figcaption><iframe data-src="Select.html" title="Select" style="height:200px" loading="lazy"></iframe></figure>
+  <figure id="CheckboxRadio"><figcaption>CheckboxRadio<span><a href="../project/components/CheckboxRadio/README.md">README</a> · <a href="CheckboxRadio.html">單獨開啟</a></span></figcaption><iframe data-src="CheckboxRadio.html" title="CheckboxRadio" style="height:330px" loading="lazy"></iframe></figure>
+  <figure id="RangeSlider"><figcaption>RangeSlider<span><a href="../project/components/RangeSlider/README.md">README</a> · <a href="RangeSlider.html">單獨開啟</a></span></figcaption><iframe data-src="RangeSlider.html" title="RangeSlider" style="height:200px" loading="lazy"></iframe></figure>
+  <figure id="Textarea"><figcaption>Textarea<span><a href="../project/components/Textarea/README.md">README</a> · <a href="Textarea.html">單獨開啟</a></span></figcaption><iframe data-src="Textarea.html" title="Textarea" style="height:260px" loading="lazy"></iframe></figure>
+  <figure id="SearchBox"><figcaption>SearchBox<span><a href="../project/components/SearchBox/README.md">README</a> · <a href="SearchBox.html">單獨開啟</a></span></figcaption><iframe data-src="SearchBox.html" title="SearchBox" style="height:180px" loading="lazy"></iframe></figure>
+  <h2 id="g-Data">Data</h2>
+  <figure id="Toolbar"><figcaption>Toolbar<span><a href="../project/components/Toolbar/README.md">README</a> · <a href="Toolbar.html">單獨開啟</a></span></figcaption><iframe data-src="Toolbar.html" title="Toolbar" style="height:180px" loading="lazy"></iframe></figure>
+  <figure id="DataTable"><figcaption>DataTable<span><a href="../project/components/DataTable/README.md">README</a> · <a href="DataTable.html">單獨開啟</a></span></figcaption><iframe data-src="DataTable.html" title="DataTable" style="height:400px" loading="lazy"></iframe></figure>
+  <figure id="Pager"><figcaption>Pager<span><a href="../project/components/Pager/README.md">README</a> · <a href="Pager.html">單獨開啟</a></span></figcaption><iframe data-src="Pager.html" title="Pager" style="height:120px" loading="lazy"></iframe></figure>
+  <figure id="StatusBadge"><figcaption>StatusBadge<span><a href="../project/components/StatusBadge/README.md">README</a> · <a href="StatusBadge.html">單獨開啟</a></span></figcaption><iframe data-src="StatusBadge.html" title="StatusBadge" style="height:250px" loading="lazy"></iframe></figure>
+  <figure id="Tag"><figcaption>Tag<span><a href="../project/components/Tag/README.md">README</a> · <a href="Tag.html">單獨開啟</a></span></figcaption><iframe data-src="Tag.html" title="Tag" style="height:200px" loading="lazy"></iframe></figure>
+  <figure id="KeyValueList"><figcaption>KeyValueList<span><a href="../project/components/KeyValueList/README.md">README</a> · <a href="KeyValueList.html">單獨開啟</a></span></figcaption><iframe data-src="KeyValueList.html" title="KeyValueList" style="height:320px" loading="lazy"></iframe></figure>
+  <h2 id="g-Feedback">Feedback</h2>
+  <figure id="Alert"><figcaption>Alert<span><a href="../project/components/Alert/README.md">README</a> · <a href="Alert.html">單獨開啟</a></span></figcaption><iframe data-src="Alert.html" title="Alert" style="height:470px" loading="lazy"></iframe></figure>
+  <figure id="ErrorBanner"><figcaption>ErrorBanner<span><a href="../project/components/ErrorBanner/README.md">README</a> · <a href="ErrorBanner.html">單獨開啟</a></span></figcaption><iframe data-src="ErrorBanner.html" title="ErrorBanner" style="height:240px" loading="lazy"></iframe></figure>
+  <figure id="Toast"><figcaption>Toast<span><a href="../project/components/Toast/README.md">README</a> · <a href="Toast.html">單獨開啟</a></span></figcaption><iframe data-src="Toast.html" title="Toast" style="height:220px" loading="lazy"></iframe></figure>
+  <figure id="EmptyState"><figcaption>EmptyState<span><a href="../project/components/EmptyState/README.md">README</a> · <a href="EmptyState.html">單獨開啟</a></span></figcaption><iframe data-src="EmptyState.html" title="EmptyState" style="height:300px" loading="lazy"></iframe></figure>
+  <figure id="LoadingPlaceholder"><figcaption>LoadingPlaceholder<span><a href="../project/components/LoadingPlaceholder/README.md">README</a> · <a href="LoadingPlaceholder.html">單獨開啟</a></span></figcaption><iframe data-src="LoadingPlaceholder.html" title="LoadingPlaceholder" style="height:200px" loading="lazy"></iframe></figure>
+  <figure id="Skeleton"><figcaption>Skeleton<span><a href="../project/components/Skeleton/README.md">README</a> · <a href="Skeleton.html">單獨開啟</a></span></figcaption><iframe data-src="Skeleton.html" title="Skeleton" style="height:220px" loading="lazy"></iframe></figure>
+  <h2 id="g-Layout">Layout</h2>
+  <figure id="AppHeader"><figcaption>AppHeader<span><a href="../project/components/AppHeader/README.md">README</a> · <a href="AppHeader.html">單獨開啟</a></span></figcaption><iframe data-src="AppHeader.html" title="AppHeader" style="height:140px" loading="lazy"></iframe></figure>
+  <figure id="Card"><figcaption>Card<span><a href="../project/components/Card/README.md">README</a> · <a href="Card.html">單獨開啟</a></span></figcaption><iframe data-src="Card.html" title="Card" style="height:290px" loading="lazy"></iframe></figure>
+  <figure id="Drawer"><figcaption>Drawer<span><a href="../project/components/Drawer/README.md">README</a> · <a href="Drawer.html">單獨開啟</a></span></figcaption><iframe data-src="Drawer.html" title="Drawer" style="height:340px" loading="lazy"></iframe></figure>
+  <figure id="Dialog"><figcaption>Dialog<span><a href="../project/components/Dialog/README.md">README</a> · <a href="Dialog.html">單獨開啟</a></span></figcaption><iframe data-src="Dialog.html" title="Dialog" style="height:280px" loading="lazy"></iframe></figure>
+  <figure id="Tabs"><figcaption>Tabs<span><a href="../project/components/Tabs/README.md">README</a> · <a href="Tabs.html">單獨開啟</a></span></figcaption><iframe data-src="Tabs.html" title="Tabs" style="height:240px" loading="lazy"></iframe></figure>
+  <h2 id="g-Charts">Charts</h2>
+  <figure id="ChartPalette"><figcaption>ChartPalette<span><a href="../project/components/ChartPalette/README.md">README</a> · <a href="ChartPalette.html">單獨開啟</a></span></figcaption><iframe data-src="ChartPalette.html" title="ChartPalette" style="height:340px" loading="lazy"></iframe></figure>
+  <figure id="SequentialDiverging"><figcaption>SequentialDiverging<span><a href="../project/components/SequentialDiverging/README.md">README</a> · <a href="SequentialDiverging.html">單獨開啟</a></span></figcaption><iframe data-src="SequentialDiverging.html" title="SequentialDiverging" style="height:340px" loading="lazy"></iframe></figure>
+  <h2 id="g-Diagram">Diagram</h2>
+  <figure id="DiagramClasses"><figcaption>DiagramClasses<span><a href="../project/components/DiagramClasses/README.md">README</a> · <a href="DiagramClasses.html">單獨開啟</a></span></figcaption><iframe data-src="DiagramClasses.html" title="DiagramClasses" style="height:350px" loading="lazy"></iframe></figure>
+  <h2 id="g-OrgChart">OrgChart</h2>
+  <figure id="OrgChartNode"><figcaption>OrgChartNode<span><a href="../project/components/OrgChartNode/README.md">README</a> · <a href="OrgChartNode.html">單獨開啟</a></span></figcaption><iframe data-src="OrgChartNode.html" title="OrgChartNode" style="height:420px" loading="lazy"></iframe></figure>
+</main>
+<script>
+(function () {
+  var frames = Array.prototype.slice.call(document.querySelectorAll("iframe[data-src]"));
+  var buttons = Array.prototype.slice.call(document.querySelectorAll("[data-set]"));
+  function apply(choice) {
+    var theme = choice;
+    if (choice === "system") theme = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", theme);
+    frames.forEach(function (f) { f.src = f.getAttribute("data-src") + "?theme=" + theme; });
+    buttons.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-set") === choice ? "true" : "false"); });
+    try { localStorage.setItem("lm-preview-theme", choice); } catch (e) {}
+  }
+  var saved = "system";
+  try { saved = localStorage.getItem("lm-preview-theme") || "system"; } catch (e) {}
+  buttons.forEach(function (b) { b.addEventListener("click", function () { apply(b.getAttribute("data-set")); }); });
+  apply(saved);
+})();
+</script>
+</body>
+</html>

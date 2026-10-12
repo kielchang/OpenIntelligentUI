@@ -1,0 +1,40 @@
+<!-- @dsCard group="Feedback" height=240 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ErrorBanner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); margin: 0 0 var(--space-2); }
+</style>
+</head>
+<body>
+  <p class="lm-demo-label">一般：可重試、可開啟金鑰設定</p>
+  <div class="lm-error-banner" role="alert">
+    <svg class="lm-error-banner__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <p class="lm-error-banner__msg">無法取得回答：模型端點回應 502，請稍後重試。</p>
+    <span class="lm-error-banner__actions">
+      <button type="button" class="lm-error-banner__btn">重試</button>
+      <button type="button" class="lm-error-banner__btn lm-error-banner__btn--secondary">開啟 API 金鑰設定</button>
+    </span>
+  </div>
+
+  <p class="lm-demo-label">busy：重試進行中（aria-busy、兩顆按鈕停用）</p>
+  <div class="lm-error-banner" role="alert" aria-busy="true">
+    <svg class="lm-error-banner__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <p class="lm-error-banner__msg">無法取得回答：模型端點回應 502，請稍後重試。</p>
+    <span class="lm-error-banner__actions">
+      <button type="button" class="lm-error-banner__btn" disabled aria-busy="true">
+        <span class="lm-error-banner__spinner" aria-hidden="true"></span>
+        重試中
+      </button>
+      <button type="button" class="lm-error-banner__btn lm-error-banner__btn--secondary" disabled>開啟 API 金鑰設定</button>
+    </span>
+  </div>
+</body>
+</html>

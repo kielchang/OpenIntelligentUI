@@ -1,0 +1,80 @@
+<!-- @dsCard group="Layout" height=290 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-3) var(--space-4); }
+  .demo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-areas: "a b c" "d e c"; gap: var(--space-3); align-items: start; }
+  .demo-cell { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
+  .demo-a { grid-area: a; } .demo-b { grid-area: b; } .demo-c { grid-area: c; } .demo-d { grid-area: d; } .demo-e { grid-area: e; }
+  @media (max-width: 600px) { .demo-grid { grid-template-columns: 1fr; grid-template-areas: "a" "b" "c" "d" "e"; } }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); }
+  /* 玻璃卡需要底下有品牌區的色塊才看得出效果；這塊只是展示用背景（對應 globals.css .abstract-bg） */
+  .demo-brand-bg { padding: var(--space-3); border-radius: var(--radius-xl); background: linear-gradient(135deg, var(--color-lilac-light), var(--color-mint-light)); }
+</style>
+</head>
+<body>
+  <div class="demo-grid">
+    <div class="demo-cell demo-a">
+      <span class="lm-demo-label">預設</span>
+      <div class="lm-card">
+        <h3 class="lm-card__title">樣本事業群</h3>
+        <p class="lm-card__text">12 個單位、184 位人員；最近排程生效 2026-10-01。</p>
+      </div>
+    </div>
+    <div class="demo-cell demo-b">
+      <span class="lm-demo-label">可點擊（a.lm-card）</span>
+      <a class="lm-card" href="#">
+        <div class="lm-card__row">
+          <div>
+            <h3 class="lm-card__title">樣本部</h3>
+            <p class="lm-card__meta">主管：樣本·志明 · 23 人</p>
+          </div>
+          <svg class="lm-card__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+    </div>
+    <div class="demo-cell demo-c">
+      <span class="lm-demo-label">含標頭與頁尾</span>
+      <div class="lm-card lm-card--sectioned">
+        <div class="lm-card__header">
+          <div>
+            <h3 class="lm-card__title">草稿 D-0042</h3>
+            <p class="lm-card__meta">樣本·美玲 · 已驗證</p>
+          </div>
+          <button type="button" class="lm-card__btn">檢視</button>
+        </div>
+        <div class="lm-card__body">
+          <p class="lm-card__text">3 筆單位搬移、1 筆職位新增；預定 2026-11-01 生效。</p>
+        </div>
+        <div class="lm-card__footer">
+          <button type="button" class="lm-card__btn">取消</button>
+          <button type="button" class="lm-card__btn lm-card__btn--primary">排程</button>
+        </div>
+      </div>
+    </div>
+    <div class="demo-cell demo-d">
+      <span class="lm-demo-label">緊湊</span>
+      <div class="lm-card lm-card--compact">
+        <h3 class="lm-card__title">待法務判讀</h3>
+        <p class="lm-card__text">4 條合規建議標記 needs_legal_review。</p>
+      </div>
+    </div>
+    <div class="demo-cell demo-e">
+      <span class="lm-demo-label">玻璃（只用在歡迎／品牌區）</span>
+      <div class="demo-brand-bg">
+        <div class="lm-card lm-card--glass">
+          <h3 class="lm-card__title">歡迎使用 DOOPING</h3>
+          <p class="lm-card__text">組織與人員模組 · 示意資料</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
