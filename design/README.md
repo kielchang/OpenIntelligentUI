@@ -69,3 +69,8 @@ node design/gallery-static/generator/build.mjs    # 改寫 gallery-static/dist/
 ```bash
 CHROMIUM_PATH=/path/to/chrome node design/lilac-mint/scripts/preview-check.mjs all --project
 ```
+
+## 其他
+
+- `notes/`：這一輪的分析紀錄與設計決策，索引見 `notes/README.md`。
+- `scripts/`：Playwright 驗收腳本，用法見 `scripts/README.md`。

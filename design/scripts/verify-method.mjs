@@ -1,0 +1,22 @@
+import { chromium } from "playwright-core";
+const OUT = new URL("../.local/screenshots/shots/", import.meta.url).pathname;
+(await import("node:fs")).mkdirSync(OUT, { recursive: true });
+const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ["--no-sandbox"] });
+const page = await (await browser.newContext({ viewport: { width: 1280, height: 900 } })).newPage();
+const errors = [];
+page.on("pageerror", (e) => errors.push(String(e)));
+page.on("console", (m) => { if (m.type() === "error") errors.push(m.text().slice(0, 200)); });
+await page.goto(`${process.env.BASE_URL ?? "http://localhost:3000"}/gallery`, { waitUntil: "networkidle", timeout: 120000 });
+const nav = await page.locator(".gal-nav a").allTextContents();
+const method = page.locator("#method");
+await method.scrollIntoViewIfNeeded();
+await page.waitForTimeout(400);
+await method.screenshot({ path: `${OUT}method-section.png`, timeout: 60000 });
+const anchors = await page.locator('#method a[href^="#"]').count();
+// 點一個錨點，確認目標進入視窗
+await page.locator('#method a[href="#item-data-table"]').first().click();
+await page.waitForTimeout(600);
+const inView = await page.locator("#item-data-table").evaluate((el) => { const r = el.getBoundingClientRect(); return r.top >= -20 && r.top < window.innerHeight; });
+await page.locator("#method-decision").screenshot({ path: `${OUT}method-decision.png`, timeout: 60000 });
+console.log(JSON.stringify({ nav, anchors, inView, errors }, null, 2));
+await browser.close();

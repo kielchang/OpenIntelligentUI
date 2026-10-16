@@ -207,7 +207,7 @@ ${sections.join("\n")}
   // 本機入口：index.html 是給 Artifact 宿主包裝的 fragment，這裡補上完整文件骨架，可直接用瀏覽器或靜態伺服器開
   const titleTag = /^\s*<title>[^<]*<\/title>/.exec(page)?.[0].trim() ?? "";
   const body = titleTag ? page.replace(/^\s*<title>[^<]*<\/title>/, "") : page;
-  const local = `<!doctype html>\n<html lang="zh-Hant">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n${titleTag}\n<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>\n</head>\n<body>\n${body}\n</body>\n</html>\n`;
+  const local = `<!doctype html>\n<html lang="zh-Hant">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n${titleTag}\n<link rel=\"icon\" href=\"data:,\">\n<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>\n</head>\n<body>\n${body}\n</body>\n</html>\n`;
   writeFileSync(resolve(OUT, "local.html"), local);
   let total = Buffer.byteLength(page);
   const manifest: Record<string, number> = { "index.html": Buffer.byteLength(page) };

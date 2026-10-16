@@ -204,6 +204,7 @@ const indexHtml = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${TITLE} · 本機預覽</title>
+<link rel="icon" href="data:,">
 <script>${themeBoot}</script>
 <link rel="stylesheet" href="../project/tokens.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
