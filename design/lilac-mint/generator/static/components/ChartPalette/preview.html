@@ -1,0 +1,81 @@
+<!-- @dsCard group="Charts" height=340 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChartPalette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-3) var(--space-4); }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-3); align-items: start; }
+  .lm-demo-label { display: block; font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); margin-bottom: var(--space-1); }
+</style>
+</head>
+<body>
+  <div class="demo-grid">
+    <div>
+      <span class="lm-demo-label">分類色盤 chart-1…7（順序固定、不循環）</span>
+      <div class="lm-chart">
+        <h3 class="lm-chart__title">各樣本部人數</h3>
+        <figure class="lm-chart__figure">
+          <svg class="lm-chart__svg" viewBox="0 0 320 170" role="img" aria-label="長條圖：七個樣本部的人數，業務 48、研發 36、製造 62、財務 21、人資 17、法務 29、資訊 40">
+            <g class="lm-chart__grid"><line x1="34" y1="12" x2="312" y2="12"/><line x1="34" y1="44" x2="312" y2="44"/><line x1="34" y1="76" x2="312" y2="76"/><line x1="34" y1="108" x2="312" y2="108"/></g>
+            <g class="lm-chart__tick"><text x="28" y="12" text-anchor="end" dominant-baseline="central">80</text><text x="28" y="44" text-anchor="end" dominant-baseline="central">60</text><text x="28" y="76" text-anchor="end" dominant-baseline="central">40</text><text x="28" y="108" text-anchor="end" dominant-baseline="central">20</text><text x="28" y="140" text-anchor="end" dominant-baseline="central">0</text></g>
+            <rect class="lm-chart__bar lm-chart__bar--1" x="36" y="63.2" width="26" height="76.8" rx="4"/>
+            <rect class="lm-chart__bar lm-chart__bar--2" x="76" y="82.4" width="26" height="57.6" rx="4"/>
+            <rect class="lm-chart__bar lm-chart__bar--3" x="116" y="40.8" width="26" height="99.2" rx="4"/>
+            <rect class="lm-chart__bar lm-chart__bar--4" x="156" y="106.4" width="26" height="33.6" rx="4"/>
+            <rect class="lm-chart__bar lm-chart__bar--5" x="196" y="112.8" width="26" height="27.2" rx="4"/>
+            <rect class="lm-chart__bar lm-chart__bar--6" x="236" y="93.6" width="26" height="46.4" rx="4"/>
+            <rect class="lm-chart__bar lm-chart__bar--7" x="276" y="76" width="26" height="64" rx="4"/>
+            <g class="lm-chart__value"><text x="49" y="58" text-anchor="middle">48</text><text x="89" y="77" text-anchor="middle">36</text><text x="129" y="36" text-anchor="middle">62</text><text x="169" y="101" text-anchor="middle">21</text><text x="209" y="108" text-anchor="middle">17</text><text x="249" y="89" text-anchor="middle">29</text><text x="289" y="71" text-anchor="middle">40</text></g>
+            <line class="lm-chart__axis" x1="34" y1="140" x2="312" y2="140"/>
+            <g class="lm-chart__tick"><text x="49" y="158" text-anchor="middle">業務</text><text x="89" y="158" text-anchor="middle">研發</text><text x="129" y="158" text-anchor="middle">製造</text><text x="169" y="158" text-anchor="middle">財務</text><text x="209" y="158" text-anchor="middle">人資</text><text x="249" y="158" text-anchor="middle">法務</text><text x="289" y="158" text-anchor="middle">資訊</text></g>
+          </svg>
+        </figure>
+        <ul class="lm-chart__legend" aria-label="圖例">
+          <li class="lm-chart__legend-item"><span class="lm-chart__swatch lm-chart__swatch--1"></span>業務</li>
+          <li class="lm-chart__legend-item"><span class="lm-chart__swatch lm-chart__swatch--2"></span>研發</li>
+          <li class="lm-chart__legend-item"><span class="lm-chart__swatch lm-chart__swatch--3"></span>製造</li>
+          <li class="lm-chart__legend-item"><span class="lm-chart__swatch lm-chart__swatch--4"></span>財務</li>
+          <li class="lm-chart__legend-item"><span class="lm-chart__swatch lm-chart__swatch--5"></span>人資</li>
+          <li class="lm-chart__legend-item"><span class="lm-chart__swatch lm-chart__swatch--6"></span>法務</li>
+          <li class="lm-chart__legend-item"><span class="lm-chart__swatch lm-chart__swatch--7"></span>資訊</li>
+        </ul>
+        <p class="lm-chart__caption">示意資料 · 單位：人</p>
+      </div>
+    </div>
+    <div>
+      <span class="lm-demo-label">highlight + mute：只強調第 3 類，其餘退為灰</span>
+      <div class="lm-chart">
+        <h3 class="lm-chart__title">製造部人數（與其他部比較）</h3>
+        <figure class="lm-chart__figure">
+          <svg class="lm-chart__svg" viewBox="0 0 320 170" role="img" aria-label="長條圖：強調製造 62 人，其餘六個樣本部以灰色呈現">
+            <g class="lm-chart__grid"><line x1="34" y1="12" x2="312" y2="12"/><line x1="34" y1="44" x2="312" y2="44"/><line x1="34" y1="76" x2="312" y2="76"/><line x1="34" y1="108" x2="312" y2="108"/></g>
+            <g class="lm-chart__tick"><text x="28" y="12" text-anchor="end" dominant-baseline="central">80</text><text x="28" y="44" text-anchor="end" dominant-baseline="central">60</text><text x="28" y="76" text-anchor="end" dominant-baseline="central">40</text><text x="28" y="108" text-anchor="end" dominant-baseline="central">20</text><text x="28" y="140" text-anchor="end" dominant-baseline="central">0</text></g>
+            <rect class="lm-chart__bar lm-chart__bar--muted" x="36.5" y="63.7" width="25" height="75.8" rx="4"/>
+            <rect class="lm-chart__bar lm-chart__bar--muted" x="76.5" y="82.9" width="25" height="56.6" rx="4"/>
+            <rect class="lm-chart__bar lm-chart__bar--3" x="116" y="40.8" width="26" height="99.2" rx="4"/>
+            <rect class="lm-chart__bar lm-chart__bar--muted" x="156.5" y="106.9" width="25" height="32.6" rx="4"/>
+            <rect class="lm-chart__bar lm-chart__bar--muted" x="196.5" y="113.3" width="25" height="26.2" rx="4"/>
+            <rect class="lm-chart__bar lm-chart__bar--muted" x="236.5" y="94.1" width="25" height="45.4" rx="4"/>
+            <rect class="lm-chart__bar lm-chart__bar--muted" x="276.5" y="76.5" width="25" height="63" rx="4"/>
+            <g class="lm-chart__value"><text x="129" y="36" text-anchor="middle">62</text></g>
+            <line class="lm-chart__axis" x1="34" y1="140" x2="312" y2="140"/>
+            <g class="lm-chart__tick"><text x="49" y="158" text-anchor="middle">業務</text><text x="89" y="158" text-anchor="middle">研發</text><text x="129" y="158" text-anchor="middle">製造</text><text x="169" y="158" text-anchor="middle">財務</text><text x="209" y="158" text-anchor="middle">人資</text><text x="249" y="158" text-anchor="middle">法務</text><text x="289" y="158" text-anchor="middle">資訊</text></g>
+          </svg>
+          <div class="lm-chart__tooltip" style="left: 46%; top: 2%;" role="note"><span class="lm-chart__tooltip-key lm-chart__swatch--3"></span>製造 <strong>62</strong> 人</div>
+        </figure>
+        <ul class="lm-chart__legend" aria-label="圖例">
+          <li class="lm-chart__legend-item is-muted"><span class="lm-chart__swatch lm-chart__swatch--muted"></span>其他六部</li>
+          <li class="lm-chart__legend-item"><span class="lm-chart__swatch lm-chart__swatch--3"></span>製造</li>
+        </ul>
+        <p class="lm-chart__caption">示意資料 · 靜態 tooltip 示範 chart-tooltip-bg／border</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!-- @dsCard group="Inputs" height=260 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Textarea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4); align-items: start; }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); display: block; margin-bottom: var(--space-3); }
+</style>
+</head>
+<body>
+  <span class="lm-demo-label">左：字數計數（上限 80 字，超出變錯誤，試著多打幾個字）；右：停用（示意資料）</span>
+  <div class="demo-grid">
+    <div class="lm-field">
+      <label class="lm-field__label" for="ta-reason">異動原因 <span class="lm-field__required" aria-hidden="true">*</span><span class="lm-sr-only">（必填）</span></label>
+      <textarea class="lm-textarea" id="ta-reason" rows="3" required data-max="80" aria-describedby="ta-reason-help ta-reason-err" placeholder="說明這次組織調整的背景與依據">樣本部自下季起併入樣本事業群，原主管職位凍結，匯報線改掛事業群副總。此段為示意資料，超過八十字後計數會轉為錯誤狀態以示範。</textarea>
+      <div class="lm-field__meta">
+        <p class="lm-field__help" id="ta-reason-help">會寫入 kernel.audit，之後不可修改。</p>
+        <span class="lm-field__count" id="ta-reason-count" aria-live="polite"></span>
+      </div>
+      <p class="lm-field__error" id="ta-reason-err" role="alert" hidden></p>
+    </div>
+    <div class="lm-field is-disabled">
+      <label class="lm-field__label" for="ta-note">合規備註</label>
+      <textarea class="lm-textarea" id="ta-note" rows="3" disabled aria-describedby="ta-note-help">PII-01：本次異動未涉及受限個資欄位。needs_legal_review = false（示意）。</textarea>
+      <p class="lm-field__help" id="ta-note-help">由合規評估產生，僅供閱讀。</p>
+    </div>
+  </div>
+  <script>
+    // 示範：即時字數；超出 data-max 時計數與邊框轉為錯誤並顯示訊息
+    var ta = document.getElementById('ta-reason');
+    var count = document.getElementById('ta-reason-count');
+    var err = document.getElementById('ta-reason-err');
+    var ERROR_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5M8 11h.01"/></svg>';
+    function update() {
+      var max = Number(ta.dataset.max);
+      var len = Array.from(ta.value).length;
+      var over = len > max;
+      count.textContent = len + ' / ' + max;
+      count.classList.toggle('is-over', over);
+      ta.setAttribute('aria-invalid', over ? 'true' : 'false');
+      err.hidden = !over;
+      err.innerHTML = over ? ERROR_ICON + '<span>超出上限 ' + (len - max) + ' 字，請縮短到 ' + max + ' 字以內。</span>' : '';
+    }
+    ta.addEventListener('input', update);
+    update();
+  </script>
+</body>
+</html>

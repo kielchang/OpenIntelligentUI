@@ -1,0 +1,44 @@
+<!-- @dsCard group="Feedback" height=200 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LoadingPlaceholder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-4); }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); margin: 0 0 var(--space-2); }
+</style>
+</head>
+<body>
+  <div class="demo-grid">
+    <div>
+      <p class="lm-demo-label">英文原句（LOADING_PHRASES，每 1.8 秒輪播）</p>
+      <div class="lm-loading" role="status" aria-busy="true" aria-live="polite">
+        <span class="lm-loading__spinner" aria-hidden="true"></span>
+        <span class="lm-loading__phrase" id="lp-en">Sketching pixels</span>
+      </div>
+    </div>
+    <div>
+      <p class="lm-demo-label">中文版（DOOPING 組織圖）</p>
+      <div class="lm-loading" role="status" aria-busy="true" aria-live="polite">
+        <span class="lm-loading__spinner" aria-hidden="true"></span>
+        <span class="lm-loading__phrase" id="lp-zh">正在讀取組織圖</span>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      if (!window.LilacMint || !window.LilacMint.rotate) return;
+      var en = ["Sketching pixels", "Wiring up nodes", "Painting gradients", "Compiling visuals", "Arranging atoms", "Rendering magic", "Polishing edges"];
+      var zh = ["正在讀取組織圖", "正在計算匯報線", "正在套用草稿"];
+      window.LilacMint.rotate(document.getElementById("lp-en"), en, 1800);
+      window.LilacMint.rotate(document.getElementById("lp-zh"), zh, 1800);
+    })();
+  </script>
+</body>
+</html>

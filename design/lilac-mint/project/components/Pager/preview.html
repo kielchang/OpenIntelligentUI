@@ -1,0 +1,49 @@
+<!-- @dsCard group="Data" height=120 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-card { border: 1px solid var(--border-default); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface-primary); }
+  .demo-card .lm-pager { border-top: none; }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); margin: 0 0 var(--space-2); }
+</style>
+</head>
+<body>
+  <p class="lm-demo-label">第一頁：「上一頁」停用、頁碼 1 為 aria-current</p>
+  <div class="demo-card">
+    <nav class="lm-pager" aria-label="分頁">
+      <label class="lm-pager__size">每頁
+        <select class="lm-pager__select" aria-label="每頁筆數">
+          <option>20</option>
+          <option>50</option>
+          <option>100</option>
+        </select>
+        筆
+      </label>
+      <span class="lm-pager__status" role="status">第 1–20 筆，共 128 筆</span>
+      <span class="lm-pager__nav">
+        <button type="button" class="lm-pager__btn" disabled aria-label="上一頁">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
+          上一頁
+        </button>
+        <button type="button" class="lm-pager__btn" aria-current="page" aria-label="第 1 頁">1</button>
+        <button type="button" class="lm-pager__btn" aria-label="第 2 頁">2</button>
+        <button type="button" class="lm-pager__btn" aria-label="第 3 頁">3</button>
+        <span class="lm-pager__ellipsis" aria-hidden="true">…</span>
+        <button type="button" class="lm-pager__btn" aria-label="第 7 頁">7</button>
+        <button type="button" class="lm-pager__btn" aria-label="下一頁">
+          下一頁
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+        </button>
+      </span>
+    </nav>
+  </div>
+</body>
+</html>

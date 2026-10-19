@@ -41,7 +41,7 @@ const cards = [
   },
 ];
 
-function ExplainerCards() {
+export function ExplainerCards() {
   return (
     <div className="explainer-cards">
       {cards.map((card) => (

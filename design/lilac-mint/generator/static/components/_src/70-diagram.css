@@ -1,0 +1,48 @@
+/* ── 70 diagram ── */
+
+/* DiagramClasses */
+/* 移植 packages/design-system SVG_CLASSES_CSS 到 .lm-diagram svg 範圍：顏色全部綁 token（淺深兩套值在 tokens 裡），不再靠 prefers-color-scheme 覆寫。
+   容器用沙箱底色 sandbox-background-primary，因為 sandbox-text／ramp token 是對這個底色調的；
+   svg 的 color 設為 sandbox-svg-s，箭頭線（.arr）與 <marker> 箭頭都用 currentColor，兩者永遠同色。 */
+.lm-diagram { box-sizing: border-box; padding: var(--space-4); border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--sandbox-background-primary); color: var(--sandbox-text-secondary); font-family: var(--font-sans); }
+.lm-diagram__title { margin: 0 0 var(--space-2); font: 600 13px/1.4 var(--font-sans); color: var(--sandbox-text-primary); }
+.lm-diagram__caption { margin: var(--space-1) 0 0; font: 400 12px/1.4 var(--font-sans); color: var(--sandbox-text-secondary); }
+.lm-diagram__caption + svg, .lm-diagram svg + .lm-diagram__title { margin-top: var(--space-3); }
+.lm-diagram svg { display: block; width: 100%; max-width: 640px; height: auto; overflow: visible; color: var(--sandbox-svg-s); }
+.lm-diagram svg text.t  { font: 400 13px var(--font-sans); fill: var(--sandbox-svg-p); }
+.lm-diagram svg text.ts { font: 400 12px var(--font-sans); fill: var(--sandbox-svg-s); }
+.lm-diagram svg text.th { font: 600 14px var(--font-sans); fill: var(--sandbox-svg-p); }
+.lm-diagram svg .box > rect, .lm-diagram svg .box > circle, .lm-diagram svg .box > ellipse { fill: var(--sandbox-svg-bg2); stroke: var(--sandbox-svg-b); stroke-width: 1; }
+.lm-diagram svg .node { cursor: pointer; }
+.lm-diagram svg .node:hover { opacity: 0.8; }
+.lm-diagram svg .arr { stroke: currentColor; stroke-width: 1.5; fill: none; }
+.lm-diagram svg .arr-head { stroke: currentColor; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.lm-diagram svg .leader { stroke: var(--sandbox-svg-t); stroke-width: 1; stroke-dasharray: 4 4; fill: none; }
+/* 九色階：形狀 fill／stroke、文字 text／text-small，淺深兩套值由 ramp token 提供 */
+.lm-diagram svg .c-purple > rect, .lm-diagram svg .c-purple > circle, .lm-diagram svg .c-purple > ellipse, .lm-diagram svg rect.c-purple, .lm-diagram svg circle.c-purple, .lm-diagram svg ellipse.c-purple { fill: var(--ramp-purple-fill); stroke: var(--ramp-purple-stroke); }
+.lm-diagram svg .c-purple text.th, .lm-diagram svg .c-purple text.t { fill: var(--ramp-purple-text); }
+.lm-diagram svg .c-purple text.ts { fill: var(--ramp-purple-text-small); }
+.lm-diagram svg .c-teal > rect, .lm-diagram svg .c-teal > circle, .lm-diagram svg .c-teal > ellipse, .lm-diagram svg rect.c-teal, .lm-diagram svg circle.c-teal, .lm-diagram svg ellipse.c-teal { fill: var(--ramp-teal-fill); stroke: var(--ramp-teal-stroke); }
+.lm-diagram svg .c-teal text.th, .lm-diagram svg .c-teal text.t { fill: var(--ramp-teal-text); }
+.lm-diagram svg .c-teal text.ts { fill: var(--ramp-teal-text-small); }
+.lm-diagram svg .c-coral > rect, .lm-diagram svg .c-coral > circle, .lm-diagram svg .c-coral > ellipse, .lm-diagram svg rect.c-coral, .lm-diagram svg circle.c-coral, .lm-diagram svg ellipse.c-coral { fill: var(--ramp-coral-fill); stroke: var(--ramp-coral-stroke); }
+.lm-diagram svg .c-coral text.th, .lm-diagram svg .c-coral text.t { fill: var(--ramp-coral-text); }
+.lm-diagram svg .c-coral text.ts { fill: var(--ramp-coral-text-small); }
+.lm-diagram svg .c-pink > rect, .lm-diagram svg .c-pink > circle, .lm-diagram svg .c-pink > ellipse, .lm-diagram svg rect.c-pink, .lm-diagram svg circle.c-pink, .lm-diagram svg ellipse.c-pink { fill: var(--ramp-pink-fill); stroke: var(--ramp-pink-stroke); }
+.lm-diagram svg .c-pink text.th, .lm-diagram svg .c-pink text.t { fill: var(--ramp-pink-text); }
+.lm-diagram svg .c-pink text.ts { fill: var(--ramp-pink-text-small); }
+.lm-diagram svg .c-gray > rect, .lm-diagram svg .c-gray > circle, .lm-diagram svg .c-gray > ellipse, .lm-diagram svg rect.c-gray, .lm-diagram svg circle.c-gray, .lm-diagram svg ellipse.c-gray { fill: var(--ramp-gray-fill); stroke: var(--ramp-gray-stroke); }
+.lm-diagram svg .c-gray text.th, .lm-diagram svg .c-gray text.t { fill: var(--ramp-gray-text); }
+.lm-diagram svg .c-gray text.ts { fill: var(--ramp-gray-text-small); }
+.lm-diagram svg .c-blue > rect, .lm-diagram svg .c-blue > circle, .lm-diagram svg .c-blue > ellipse, .lm-diagram svg rect.c-blue, .lm-diagram svg circle.c-blue, .lm-diagram svg ellipse.c-blue { fill: var(--ramp-blue-fill); stroke: var(--ramp-blue-stroke); }
+.lm-diagram svg .c-blue text.th, .lm-diagram svg .c-blue text.t { fill: var(--ramp-blue-text); }
+.lm-diagram svg .c-blue text.ts { fill: var(--ramp-blue-text-small); }
+.lm-diagram svg .c-green > rect, .lm-diagram svg .c-green > circle, .lm-diagram svg .c-green > ellipse, .lm-diagram svg rect.c-green, .lm-diagram svg circle.c-green, .lm-diagram svg ellipse.c-green { fill: var(--ramp-green-fill); stroke: var(--ramp-green-stroke); }
+.lm-diagram svg .c-green text.th, .lm-diagram svg .c-green text.t { fill: var(--ramp-green-text); }
+.lm-diagram svg .c-green text.ts { fill: var(--ramp-green-text-small); }
+.lm-diagram svg .c-amber > rect, .lm-diagram svg .c-amber > circle, .lm-diagram svg .c-amber > ellipse, .lm-diagram svg rect.c-amber, .lm-diagram svg circle.c-amber, .lm-diagram svg ellipse.c-amber { fill: var(--ramp-amber-fill); stroke: var(--ramp-amber-stroke); }
+.lm-diagram svg .c-amber text.th, .lm-diagram svg .c-amber text.t { fill: var(--ramp-amber-text); }
+.lm-diagram svg .c-amber text.ts { fill: var(--ramp-amber-text-small); }
+.lm-diagram svg .c-red > rect, .lm-diagram svg .c-red > circle, .lm-diagram svg .c-red > ellipse, .lm-diagram svg rect.c-red, .lm-diagram svg circle.c-red, .lm-diagram svg ellipse.c-red { fill: var(--ramp-red-fill); stroke: var(--ramp-red-stroke); }
+.lm-diagram svg .c-red text.th, .lm-diagram svg .c-red text.t { fill: var(--ramp-red-text); }
+.lm-diagram svg .c-red text.ts { fill: var(--ramp-red-text-small); }

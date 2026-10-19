@@ -1,0 +1,71 @@
+<!-- @dsCard group="Data" height=200 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tag</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-row { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; margin-bottom: var(--space-3); }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); width: 100%; }
+</style>
+</head>
+<body>
+  <div class="demo-row">
+    <span class="lm-demo-label">一般、計數、品牌、可移除</span>
+    <span class="lm-tag">樣本事業群</span>
+    <span class="lm-tag">台北</span>
+    <span class="lm-tag">派遣 <span class="lm-tag__count">12</span></span>
+    <span class="lm-tag">職缺 <span class="lm-tag__count">3</span></span>
+    <span class="lm-tag lm-tag--brand">DOOPING</span>
+    <span class="lm-tag lm-tag--brand">來源：SMERP</span>
+    <span class="lm-tag">兼任
+      <button type="button" class="lm-tag__remove" aria-label="移除">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </span>
+    <span class="lm-tag lm-tag--brand">SMFLOW 已簽
+      <button type="button" class="lm-tag__remove" aria-label="移除">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </span>
+  </div>
+  <div class="demo-row" role="group" aria-label="狀態篩選">
+    <span class="lm-demo-label">篩選 chip（button[aria-pressed]）</span>
+    <button type="button" class="lm-chip" aria-pressed="true">
+      <svg class="lm-chip__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      有效
+    </button>
+    <button type="button" class="lm-chip" aria-pressed="false">
+      <svg class="lm-chip__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      凍結
+    </button>
+    <button type="button" class="lm-chip" aria-pressed="true">
+      <svg class="lm-chip__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      派遣
+    </button>
+    <button type="button" class="lm-chip" aria-pressed="false">
+      <svg class="lm-chip__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      兼任
+    </button>
+    <button type="button" class="lm-chip" aria-pressed="false" disabled>
+      <svg class="lm-chip__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      已合併
+    </button>
+  </div>
+  <script>
+    document.querySelectorAll(".lm-chip").forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        chip.setAttribute("aria-pressed", chip.getAttribute("aria-pressed") === "true" ? "false" : "true");
+      });
+    });
+    document.querySelectorAll(".lm-tag__remove").forEach(function (btn) {
+      btn.addEventListener("click", function () { btn.closest(".lm-tag").remove(); });
+    });
+  </script>
+</body>
+</html>

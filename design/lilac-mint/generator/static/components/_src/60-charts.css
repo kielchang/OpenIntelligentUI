@@ -1,0 +1,89 @@
+/* ── 60 charts ── */
+
+/* ChartPalette */
+/* 分類色盤 chart-1…7 順序固定、不循環；第 8 類起或要強調時改用 highlight+mute（只有一類用 chart-N，其餘 surface-quaternary + 1px border-default）。
+   圖表放在 surface-primary 上（chart-axis 對它淺色 4.8:1）。 */
+.lm-chart { box-sizing: border-box; position: relative; padding: var(--space-3); border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--surface-primary); color: var(--text-primary); font-family: var(--font-sans); }
+.lm-chart__title { margin: 0 0 var(--space-2); font: 600 13px/1.4 var(--font-sans); color: var(--text-primary); }
+.lm-chart__figure { position: relative; margin: 0; }
+.lm-chart__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.lm-chart__bar { stroke: none; }
+.lm-chart__bar--1 { fill: var(--chart-1); }
+.lm-chart__bar--2 { fill: var(--chart-2); }
+.lm-chart__bar--3 { fill: var(--chart-3); }
+.lm-chart__bar--4 { fill: var(--chart-4); }
+.lm-chart__bar--5 { fill: var(--chart-5); }
+.lm-chart__bar--6 { fill: var(--chart-6); }
+.lm-chart__bar--7 { fill: var(--chart-7); }
+.lm-chart__bar--muted { fill: var(--surface-quaternary); stroke: var(--border-default); stroke-width: 1; }
+.lm-chart__axis { stroke: var(--chart-axis); stroke-width: 1; fill: none; shape-rendering: crispEdges; }
+.lm-chart__grid { stroke: var(--border-subtle); stroke-width: 1; fill: none; shape-rendering: crispEdges; }
+.lm-chart__tick { font: 400 11px var(--font-sans); fill: var(--chart-axis); }
+.lm-chart__value { font: 500 11px var(--font-sans); fill: var(--text-primary); font-variant-numeric: tabular-nums; }
+.lm-chart__legend { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: var(--space-2) 0 0; padding: 0; list-style: none; font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); }
+.lm-chart__legend-item { display: inline-flex; align-items: center; gap: 6px; }
+.lm-chart__swatch { box-sizing: border-box; width: 10px; height: 10px; border-radius: 2px; flex: none; }
+.lm-chart__swatch--1 { background: var(--chart-1); }
+.lm-chart__swatch--2 { background: var(--chart-2); }
+.lm-chart__swatch--3 { background: var(--chart-3); }
+.lm-chart__swatch--4 { background: var(--chart-4); }
+.lm-chart__swatch--5 { background: var(--chart-5); }
+.lm-chart__swatch--6 { background: var(--chart-6); }
+.lm-chart__swatch--7 { background: var(--chart-7); }
+.lm-chart__swatch--muted { background: var(--surface-quaternary); border: 1px solid var(--border-default); }
+.lm-chart__legend-item.is-muted { color: var(--text-secondary); }
+.lm-chart__tooltip { position: absolute; z-index: 1; padding: 8px 12px; border: 1px solid var(--chart-tooltip-border); border-radius: var(--radius-md); background: var(--chart-tooltip-bg); color: var(--text-primary); box-shadow: var(--shadow-md); font: 400 12px/1.4 var(--font-sans); white-space: nowrap; pointer-events: none; }
+.lm-chart__tooltip strong { font-weight: 600; font-variant-numeric: tabular-nums; }
+.lm-chart__tooltip-key { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
+.lm-chart__caption { margin: var(--space-2) 0 0; font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); }
+
+/* SequentialDiverging */
+/* 連續（scale-mint-1…7，淺→深）給單一度量；發散（scale-diverge-1…7，4 = 基準／零）給偏差。兩套都不當分類色。
+   .lm-seq-N／.lm-div-N 是填色 class，可套在色階格、熱力格、偏差條上。 */
+.lm-scale { color: var(--text-primary); font-family: var(--font-sans); }
+.lm-scale__title { margin: 0 0 var(--space-1); font: 600 13px/1.4 var(--font-sans); }
+.lm-scale__strip { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px; margin: 0; padding: 0; list-style: none; }
+.lm-scale__step { position: relative; height: 24px; border-radius: 3px; }
+.lm-scale__step:first-child { border-radius: var(--radius-sm) 3px 3px var(--radius-sm); }
+.lm-scale__step:last-child { border-radius: 3px var(--radius-sm) var(--radius-sm) 3px; }
+.lm-scale__labels { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px; margin: 2px 0 0; padding: 0; list-style: none; font: 400 11px/1.4 var(--font-sans); color: var(--text-secondary); text-align: center; font-variant-numeric: tabular-nums; }
+.lm-scale__labels .is-mid { color: var(--text-primary); font-weight: 600; }
+.lm-scale__ends { display: flex; justify-content: space-between; margin: 0; font: 400 11px/1.4 var(--font-sans); color: var(--text-secondary); }
+.lm-seq-1 { background: var(--scale-mint-1); }
+.lm-seq-2 { background: var(--scale-mint-2); }
+.lm-seq-3 { background: var(--scale-mint-3); }
+.lm-seq-4 { background: var(--scale-mint-4); }
+.lm-seq-5 { background: var(--scale-mint-5); }
+.lm-seq-6 { background: var(--scale-mint-6); }
+.lm-seq-7 { background: var(--scale-mint-7); }
+.lm-div-1 { background: var(--scale-diverge-1); }
+.lm-div-2 { background: var(--scale-diverge-2); }
+.lm-div-3 { background: var(--scale-diverge-3); }
+.lm-div-4 { background: var(--scale-diverge-4); }
+.lm-div-5 { background: var(--scale-diverge-5); }
+.lm-div-6 { background: var(--scale-diverge-6); }
+.lm-div-7 { background: var(--scale-diverge-7); }
+/* 最淺的 1 階在兩主題都接近表面色，加 1px 邊框才看得到格子邊界 */
+.lm-scale__step.lm-seq-1, .lm-scale__step.lm-div-4, .lm-heat__cell.lm-seq-1 { box-shadow: inset 0 0 0 1px var(--border-default); }
+/* 熱力圖：格子只帶顏色，數值放在 title／aria-label 與旁邊的表格 */
+.lm-heat { display: grid; gap: 2px; align-items: center; font: 400 11px/1.4 var(--font-sans); color: var(--text-secondary); }
+.lm-heat__col { text-align: center; font-variant-numeric: tabular-nums; }
+.lm-heat__row { padding-right: var(--space-2); white-space: nowrap; }
+.lm-heat__cell { display: block; height: 20px; border-radius: 3px; }
+.lm-scale__table { width: 100%; border-collapse: collapse; margin-top: var(--space-2); font: 400 11px/1.4 var(--font-sans); color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.lm-scale__table th, .lm-scale__table td { padding: 1px 6px; text-align: right; border-bottom: 1px solid var(--border-subtle); }
+.lm-scale__table th { font-weight: 500; color: var(--text-secondary); }
+.lm-scale__table th:first-child, .lm-scale__table td:first-child { text-align: left; }
+.lm-scale__table caption { caption-side: top; text-align: left; padding: 0 0 2px; color: var(--text-secondary); }
+/* 偏差條：中線是基準，向右正、向左負；階數依偏差大小取 div-1…7 */
+.lm-dev { display: grid; gap: 3px; font: 400 12px/1.4 var(--font-sans); }
+.lm-dev__row { display: grid; grid-template-columns: 72px minmax(0, 1fr) 36px; align-items: center; gap: var(--space-2); }
+.lm-dev__label { color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lm-dev__track { position: relative; height: 14px; }
+.lm-dev__zero { position: absolute; left: 50%; top: -2px; bottom: -2px; border-left: 1px solid var(--chart-axis); }
+.lm-dev__bar { position: absolute; top: 0; height: 100%; }
+.lm-dev__bar.is-positive { border-radius: 0 3px 3px 0; left: 50%; }
+.lm-dev__bar.is-negative { border-radius: 3px 0 0 3px; right: 50%; }
+.lm-dev__value { color: var(--text-primary); font-weight: 500; font-variant-numeric: tabular-nums; text-align: right; }
+.lm-dev__axis { display: grid; grid-template-columns: 72px minmax(0, 1fr) 36px; gap: var(--space-2); font: 400 11px/1.4 var(--font-sans); color: var(--text-secondary); }
+.lm-dev__axis span:nth-child(2) { display: flex; justify-content: space-between; }

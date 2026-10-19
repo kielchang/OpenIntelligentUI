@@ -1,0 +1,9 @@
+{
+  "name": "design-verification-scripts",
+  "private": true,
+  "type": "module",
+  "description": "Playwright checks for /gallery, the static gallery copy and the Lilac Mint previews. Not a workspace package.",
+  "dependencies": {
+    "playwright-core": "^1.56.1"
+  }
+}

@@ -1,0 +1,52 @@
+<!-- @dsCard group="Feedback" height=220 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skeleton</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); align-items: start; }
+  .demo-card { padding: var(--space-3); border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--surface-primary); }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); margin: 0 0 var(--space-2); }
+</style>
+</head>
+<body>
+  <p class="lm-demo-label">文字列 ／ 頭像＋兩行 ／ 表格 4 列（閃爍只在 prefers-reduced-motion: no-preference）</p>
+  <div class="demo-grid">
+    <div class="demo-card">
+      <span class="lm-sr-only">載入中</span>
+      <div class="lm-skeleton-group" aria-hidden="true">
+        <span class="lm-skeleton lm-skeleton--heading lm-skeleton--medium"></span>
+        <span class="lm-skeleton lm-skeleton--long"></span>
+        <span class="lm-skeleton lm-skeleton--long"></span>
+        <span class="lm-skeleton lm-skeleton--short"></span>
+      </div>
+    </div>
+    <div class="demo-card">
+      <span class="lm-sr-only">載入中</span>
+      <div class="lm-skeleton-row" aria-hidden="true">
+        <span class="lm-skeleton lm-skeleton--circle"></span>
+        <div class="lm-skeleton-group">
+          <span class="lm-skeleton lm-skeleton--medium"></span>
+          <span class="lm-skeleton lm-skeleton--short"></span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="lm-sr-only">載入中</span>
+      <div class="lm-skeleton-table" aria-hidden="true">
+        <span class="lm-skeleton lm-skeleton--head"></span><span class="lm-skeleton lm-skeleton--head"></span><span class="lm-skeleton lm-skeleton--head"></span><span class="lm-skeleton lm-skeleton--head"></span>
+        <span class="lm-skeleton"></span><span class="lm-skeleton"></span><span class="lm-skeleton"></span><span class="lm-skeleton"></span>
+        <span class="lm-skeleton"></span><span class="lm-skeleton"></span><span class="lm-skeleton"></span><span class="lm-skeleton"></span>
+        <span class="lm-skeleton"></span><span class="lm-skeleton"></span><span class="lm-skeleton"></span><span class="lm-skeleton"></span>
+        <span class="lm-skeleton"></span><span class="lm-skeleton"></span><span class="lm-skeleton"></span><span class="lm-skeleton"></span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

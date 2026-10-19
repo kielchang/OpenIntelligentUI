@@ -1,0 +1,55 @@
+/* ── 80 orgchart ── */
+
+/* OrgChartNode */
+/* 來源 packages/org-chart/src/org-chart.css .org-card：min-width 168、max-width 240、padding 10px 14px、radius 8、13px/1.4；折疊鈕 22px 圓形在右上角；
+   這裡只重現節點外觀與連線語意（實線＝正式匯報、虛線＝虛線匯報），不含 React Flow。 */
+.lm-org-node { position: relative; box-sizing: border-box; width: 200px; min-width: 168px; max-width: 240px; padding: 10px 36px 10px 14px; border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--surface-primary); box-shadow: var(--shadow-compact); color: var(--text-primary); font: 400 13px/1.4 var(--font-sans); text-align: left; }
+.lm-org-node__name { display: flex; align-items: center; gap: 4px; font: 600 13px/1.4 var(--font-sans); color: var(--text-primary); }
+.lm-org-node__name svg { width: 14px; height: 14px; flex: none; }
+.lm-org-node__title { font: 400 13px/1.5 var(--font-sans); color: var(--text-primary); }
+.lm-org-node__unit { margin-top: 2px; font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); }
+.lm-org-node__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin-top: 6px; }
+.lm-org-node__manager { display: inline-flex; align-items: center; gap: 4px; font: 500 11px/18px var(--font-sans); color: var(--text-primary); white-space: nowrap; }
+.lm-org-node__manager svg { width: 14px; height: 14px; flex: none; color: var(--color-mint-dark); }
+.lm-org-node__chip { display: inline-flex; align-items: center; padding: 0 6px; border-radius: 9px; background: var(--color-lilac); color: var(--on-brand); font: 600 11px/18px var(--font-sans); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lm-org-node__tag { display: inline-flex; align-items: center; gap: 4px; padding: 0 6px; border: 1px solid var(--border-default); border-radius: 9px; background: var(--surface-quaternary); color: var(--text-secondary); font: 500 11px/18px var(--font-sans); white-space: nowrap; }
+.lm-org-node__tag svg { width: 12px; height: 12px; flex: none; }
+.lm-org-node__toggle { position: absolute; top: 6px; right: 6px; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 6px; border: 1px solid var(--border-default); border-radius: 11px; background: var(--background); color: var(--text-primary); font: 500 11px/1 var(--font-sans); font-variant-numeric: tabular-nums; cursor: pointer; }
+.lm-org-node__toggle:hover { border-color: var(--border-hover); background: var(--surface-btn-hover); }
+/* 狀態：空缺（虛線框＋「空缺」）、凍結（次要文字＋鎖）、搜尋命中（focus-ring 外框）、草稿變更（warning 框＋角落小標） */
+.lm-org-node.is-vacant { border-style: dashed; background: var(--surface-secondary); color: var(--text-secondary); }
+.lm-org-node.is-vacant .lm-org-node__name, .lm-org-node.is-vacant .lm-org-node__title { color: var(--text-secondary); }
+.lm-org-node.is-frozen { color: var(--text-secondary); }
+.lm-org-node.is-frozen .lm-org-node__name, .lm-org-node.is-frozen .lm-org-node__title, .lm-org-node.is-frozen .lm-org-node__manager { color: var(--text-secondary); }
+.lm-org-node.is-frozen .lm-org-node__manager svg { color: var(--text-secondary); }
+.lm-org-node.is-highlighted { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.lm-org-node.is-draft { border-color: var(--sandbox-border-warning); }
+.lm-org-node__corner { position: absolute; top: -9px; left: 10px; display: inline-flex; align-items: center; gap: 3px; padding: 0 6px; border: 1px solid var(--sandbox-border-warning); border-radius: 999px; background: var(--sandbox-background-warning); color: var(--sandbox-text-warning); font: 600 11px/16px var(--font-sans); white-space: nowrap; }
+.lm-org-node__corner svg { width: 10px; height: 10px; }
+/* 虛線匯報的節點：虛線邊框（文字與底色不變，和空缺不同） */
+.lm-org-node--dotted { border-style: dashed; }
+
+/* 連線：實線＝正式匯報，虛線＝虛線匯報；寬版為上下樹，≤560px 改為左側軌道的直列 */
+.lm-org-tree { display: flex; flex-direction: column; align-items: center; color: var(--text-primary); font-family: var(--font-sans); }
+.lm-org-tree__root { position: relative; display: flex; justify-content: center; padding-bottom: 24px; }
+.lm-org-tree__root::after { content: ""; position: absolute; left: 50%; bottom: 0; height: 24px; border-left: 1.5px solid var(--text-secondary); }
+.lm-org-tree__children { display: flex; justify-content: center; align-items: flex-start; margin: 0; padding: 0; list-style: none; }
+.lm-org-tree__child { position: relative; display: flex; justify-content: center; padding: 24px 12px 0; }
+.lm-org-tree__child::before { content: ""; position: absolute; top: 0; left: 50%; height: 24px; border-left: 1.5px solid var(--text-secondary); }
+.lm-org-tree__child::after { content: ""; position: absolute; top: 0; left: 0; right: 0; border-top: 1.5px solid var(--text-secondary); }
+.lm-org-tree__child:first-child::after { left: 50%; }
+.lm-org-tree__child:last-child::after { right: 50%; }
+.lm-org-tree__child:only-child::after { display: none; }
+.lm-org-tree__child--dotted::before { border-left-style: dashed; }
+@media (max-width: 560px) {
+  .lm-org-tree { align-items: stretch; }
+  .lm-org-tree__root { justify-content: flex-start; padding-bottom: 0; }
+  .lm-org-tree__root::after { display: none; }
+  .lm-org-tree__children { flex-direction: column; align-items: stretch; margin-left: 24px; }
+  .lm-org-tree__child { justify-content: flex-start; padding: 8px 0 8px 20px; }
+  .lm-org-tree__child::before { top: 50%; left: 0; width: 20px; height: 0; border-left: 0; border-top: 1.5px solid var(--text-secondary); }
+  .lm-org-tree__child--dotted::before { border-top-style: dashed; }
+  .lm-org-tree__child::after { top: 0; bottom: 0; left: 0; right: auto; border-top: 0; border-left: 1.5px solid var(--text-secondary); }
+  .lm-org-tree__child:first-child::after { left: 0; }
+  .lm-org-tree__child:last-child::after { right: auto; bottom: 50%; }
+}

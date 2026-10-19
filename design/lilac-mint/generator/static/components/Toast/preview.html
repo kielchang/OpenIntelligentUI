@@ -1,0 +1,36 @@
+<!-- @dsCard group="Feedback" height=220 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .lm-toast-region--static { position: static; transform: none; }
+  .demo-row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; margin-top: var(--space-4); }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); margin: 0 0 var(--space-2); }
+  .demo-row__label { width: 100%; margin: 0; }
+</style>
+</head>
+<body>
+  <p class="lm-demo-label">四種 tone（靜態擺放；實際會固定在視窗底部置中）</p>
+  <div class="lm-toast-region lm-toast-region--static" aria-hidden="true">
+    <div class="lm-toast lm-toast--info">已載入 128 筆人員</div>
+    <div class="lm-toast lm-toast--success">草稿已排程</div>
+    <div class="lm-toast lm-toast--warning">生效日早於今天</div>
+    <div class="lm-toast lm-toast--danger">排程失敗：匯報線循環</div>
+  </div>
+  <div class="demo-row">
+    <span class="lm-demo-label demo-row__label">實際觸發（4 秒自清、同時最多 3 則）</span>
+    <button type="button" class="lm-toast-trigger" data-lm-toast="草稿已排程" data-lm-tone="success">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      排程草稿
+    </button>
+    <button type="button" class="lm-toast-trigger" data-lm-toast="排程失敗：匯報線循環" data-lm-tone="danger">模擬失敗</button>
+  </div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lilac Mint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); overflow: hidden; }
+  .cover { position: relative; height: 288px; overflow: hidden; }
+  /* 構圖：960 版面右半的 480 寬框，不碰左下的名稱 */
+  .art { position: absolute; top: 0; left: 480px; width: 480px; height: 288px; overflow: hidden; }
+  .art svg { display: block; width: 640px; height: 288px; }
+  .lilac { fill: var(--color-lilac); }
+  .mint { fill: var(--color-mint); }
+  .ink { fill: var(--text-primary); }
+  .mark { fill: var(--color-mint-dark); }
+  .blk { rx: var(--radius-md); }
+  .badge { rx: var(--radius-sm); }
+  /* 點陣：space-6 節距、半徑 2px（space-1 的一半），用 ink 塊的顏色 */
+  .dot { fill: var(--text-primary); }
+  .words { position: absolute; left: var(--space-6); right: var(--space-6); bottom: var(--space-6); max-width: 440px; }
+  .name { margin: 0; font-size: 72px; line-height: .9; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); }
+  .tag { margin: var(--space-2) 0 0 2px; font-size: 14px; line-height: 20px; color: var(--text-secondary); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 640 288" width="640" height="288">
+<!--
+  blocks      color-lilac 144×240 從頂端出血（識別色之一，最大）· color-mint 144×184（識別色之二）· text-primary 304×216 從右緣出血（ink，資料畫面的主角）· color-mint-dark 64×24 一枚（它只代表主管標記與成功）— 約 46% of 960×288
+  arrangement 一片 lilac 高板加衛星：底邊對齊在距邊 space-6 的同一線上，間隔 space-4
+  pattern     點陣，取自「密度以表格為準、4px 基準、數值用 mono」：space-6 節距、r=2 的點，排在 mint 塊上，6 欄 × 7 列共 42 點，用 ink 塊的顏色
+  scales      邊長都是 space-2 的倍數；間隔 space-4；節距 space-6；圓角 radius-md，小徽章 radius-sm
+-->
+<rect class="lilac blk" x="16" y="-16" width="144" height="240" rx="8"/>
+<rect class="mark badge" x="16" y="240" width="64" height="24" rx="6"/>
+<rect class="mint blk" x="176" y="80" width="144" height="184" rx="8"/>
+<rect class="ink blk" x="336" y="48" width="304" height="216" rx="8"/>
+<g class="dot">
+<circle cx="188" cy="92" r="2"/><circle cx="212" cy="92" r="2"/><circle cx="236" cy="92" r="2"/><circle cx="260" cy="92" r="2"/><circle cx="284" cy="92" r="2"/><circle cx="308" cy="92" r="2"/>
+<circle cx="188" cy="116" r="2"/><circle cx="212" cy="116" r="2"/><circle cx="236" cy="116" r="2"/><circle cx="260" cy="116" r="2"/><circle cx="284" cy="116" r="2"/><circle cx="308" cy="116" r="2"/>
+<circle cx="188" cy="140" r="2"/><circle cx="212" cy="140" r="2"/><circle cx="236" cy="140" r="2"/><circle cx="260" cy="140" r="2"/><circle cx="284" cy="140" r="2"/><circle cx="308" cy="140" r="2"/>
+<circle cx="188" cy="164" r="2"/><circle cx="212" cy="164" r="2"/><circle cx="236" cy="164" r="2"/><circle cx="260" cy="164" r="2"/><circle cx="284" cy="164" r="2"/><circle cx="308" cy="164" r="2"/>
+<circle cx="188" cy="188" r="2"/><circle cx="212" cy="188" r="2"/><circle cx="236" cy="188" r="2"/><circle cx="260" cy="188" r="2"/><circle cx="284" cy="188" r="2"/><circle cx="308" cy="188" r="2"/>
+<circle cx="188" cy="212" r="2"/><circle cx="212" cy="212" r="2"/><circle cx="236" cy="212" r="2"/><circle cx="260" cy="212" r="2"/><circle cx="284" cy="212" r="2"/><circle cx="308" cy="212" r="2"/>
+<circle cx="188" cy="236" r="2"/><circle cx="212" cy="236" r="2"/><circle cx="236" cy="236" r="2"/><circle cx="260" cy="236" r="2"/><circle cx="284" cy="236" r="2"/><circle cx="308" cy="236" r="2"/>
+</g>
+</svg>
+</div>
+<div class="words">
+<h1 class="name">Lilac Mint</h1>
+<p class="tag">資料密集系統的克制視覺語言，答案要能操作。</p>
+</div>
+</div>
+</body>
+</html>

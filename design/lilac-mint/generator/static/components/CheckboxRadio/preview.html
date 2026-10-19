@@ -1,0 +1,81 @@
+<!-- @dsCard group="Inputs" height=330 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CheckboxRadio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-4); }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4) var(--space-6); align-items: start; margin-bottom: var(--space-4); }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); display: block; margin-bottom: var(--space-3); }
+</style>
+</head>
+<body>
+  <span class="lm-demo-label">垂直：checkbox 群（含 indeterminate 與停用）與 radio 群；水平：radio 一列（示意資料）</span>
+  <div class="demo-grid">
+    <fieldset class="lm-choice-group">
+      <legend class="lm-choice-group__legend">匯出內容</legend>
+      <label class="lm-choice">
+        <input class="lm-choice__input" type="checkbox" id="cb-all" aria-controls="cb-units cb-positions">
+        <span>全部</span>
+        <span class="lm-choice__desc">部分勾選時顯示為 indeterminate</span>
+      </label>
+      <label class="lm-choice">
+        <input class="lm-choice__input" type="checkbox" id="cb-units" checked>
+        <span>單位與階層</span>
+      </label>
+      <label class="lm-choice">
+        <input class="lm-choice__input" type="checkbox" id="cb-positions">
+        <span>職位與任職者</span>
+        <span class="lm-choice__desc">含派遣／約聘計數</span>
+      </label>
+      <label class="lm-choice">
+        <input class="lm-choice__input" type="checkbox" checked disabled>
+        <span>稽核紀錄</span>
+        <span class="lm-choice__desc">依權限固定附上</span>
+      </label>
+    </fieldset>
+    <fieldset class="lm-choice-group">
+      <legend class="lm-choice-group__legend">生效方式</legend>
+      <label class="lm-choice">
+        <input class="lm-choice__input" type="radio" name="apply" value="now" checked>
+        <span>驗證後立即排程</span>
+      </label>
+      <label class="lm-choice">
+        <input class="lm-choice__input" type="radio" name="apply" value="date">
+        <span>指定生效日</span>
+        <span class="lm-choice__desc">以 daterange 的起日為準</span>
+      </label>
+      <label class="lm-choice">
+        <input class="lm-choice__input" type="radio" name="apply" value="hold" disabled>
+        <span>暫存不排程</span>
+        <span class="lm-choice__desc">目前角色無此權限</span>
+      </label>
+    </fieldset>
+  </div>
+  <fieldset class="lm-choice-group lm-choice-group--inline">
+    <legend class="lm-choice-group__legend">人員狀態篩選</legend>
+    <label class="lm-choice"><input class="lm-choice__input" type="radio" name="pstate" value="all" checked><span>全部</span></label>
+    <label class="lm-choice"><input class="lm-choice__input" type="radio" name="pstate" value="active"><span>active</span></label>
+    <label class="lm-choice"><input class="lm-choice__input" type="radio" name="pstate" value="inactive"><span>inactive</span></label>
+    <label class="lm-choice"><input class="lm-choice__input" type="radio" name="pstate" value="merged"><span>merged</span></label>
+  </fieldset>
+  <script>
+    // 示範：父項的 indeterminate 由子項決定；點父項則全選／全不選
+    var all = document.getElementById('cb-all');
+    var kids = [document.getElementById('cb-units'), document.getElementById('cb-positions')];
+    function sync() {
+      var n = kids.filter(function (k) { return k.checked; }).length;
+      all.checked = n === kids.length;
+      all.indeterminate = n > 0 && n < kids.length;
+    }
+    kids.forEach(function (k) { k.addEventListener('change', sync); });
+    all.addEventListener('change', function () { kids.forEach(function (k) { k.checked = all.checked; }); sync(); });
+    sync();
+  </script>
+</body>
+</html>

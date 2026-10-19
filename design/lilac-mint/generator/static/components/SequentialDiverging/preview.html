@@ -1,0 +1,73 @@
+<!-- @dsCard group="Charts" height=340 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SequentialDiverging</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-3) var(--space-4); }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-3) var(--space-5); align-items: start; }
+  .demo-col { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+  .lm-demo-label { display: block; font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); }
+  .demo-heat { grid-template-columns: 64px repeat(5, minmax(0, 1fr)); }
+</style>
+</head>
+<body>
+  <div class="demo-grid">
+    <div class="demo-col">
+      <div class="lm-scale">
+        <h3 class="lm-scale__title">單色連續 scale-mint-1…7</h3>
+        <ul class="lm-scale__strip" aria-label="連續色階，淺到深七階">
+          <li class="lm-scale__step lm-seq-1"></li><li class="lm-scale__step lm-seq-2"></li><li class="lm-scale__step lm-seq-3"></li><li class="lm-scale__step lm-seq-4"></li><li class="lm-scale__step lm-seq-5"></li><li class="lm-scale__step lm-seq-6"></li><li class="lm-scale__step lm-seq-7"></li>
+        </ul>
+        <ul class="lm-scale__labels" aria-hidden="true"><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li></ul>
+        <p class="lm-scale__ends"><span>低</span><span>高</span></p>
+      </div>
+      <div class="lm-scale">
+        <h3 class="lm-scale__title">發散 scale-diverge-1…7（中點 4 = 基準）</h3>
+        <ul class="lm-scale__strip" aria-label="發散色階，負三階到正三階">
+          <li class="lm-scale__step lm-div-1"></li><li class="lm-scale__step lm-div-2"></li><li class="lm-scale__step lm-div-3"></li><li class="lm-scale__step lm-div-4"></li><li class="lm-scale__step lm-div-5"></li><li class="lm-scale__step lm-div-6"></li><li class="lm-scale__step lm-div-7"></li>
+        </ul>
+        <ul class="lm-scale__labels" aria-hidden="true"><li>−3</li><li>−2</li><li>−1</li><li class="is-mid">0</li><li>+1</li><li>+2</li><li>+3</li></ul>
+        <p class="lm-scale__ends"><span>低於基準</span><span>高於基準</span></p>
+      </div>
+      <div class="lm-scale">
+        <h3 class="lm-scale__title">偏差條（發散）：在職人數 − 編制</h3>
+        <div class="lm-dev" role="list">
+          <div class="lm-dev__row" role="listitem"><span class="lm-dev__label">樣本研發部</span><span class="lm-dev__track"><span class="lm-dev__zero"></span><span class="lm-dev__bar is-positive lm-div-7" style="width: 40%"></span></span><span class="lm-dev__value">+12</span></div>
+          <div class="lm-dev__row" role="listitem"><span class="lm-dev__label">樣本製造部</span><span class="lm-dev__track"><span class="lm-dev__zero"></span><span class="lm-dev__bar is-negative lm-div-2" style="width: 27%"></span></span><span class="lm-dev__value">−8</span></div>
+          <div class="lm-dev__row" role="listitem"><span class="lm-dev__label">樣本業務部</span><span class="lm-dev__track"><span class="lm-dev__zero"></span><span class="lm-dev__bar is-positive lm-div-5" style="width: 10%"></span></span><span class="lm-dev__value">+3</span></div>
+          <div class="lm-dev__row" role="listitem"><span class="lm-dev__label">樣本人資部</span><span class="lm-dev__track"><span class="lm-dev__zero"></span><span class="lm-dev__bar is-negative lm-div-1" style="width: 50%"></span></span><span class="lm-dev__value">−15</span></div>
+        </div>
+        <p class="lm-dev__axis"><span></span><span><span>−15</span><span>0</span><span>+15</span></span><span></span></p>
+      </div>
+    </div>
+    <div class="demo-col">
+      <div class="lm-scale">
+        <h3 class="lm-scale__title">熱力圖（連續）：每週加班時數</h3>
+        <div class="lm-heat demo-heat" role="img" aria-label="熱力圖，四個樣本部在五週的加班時數；數值見下表">
+          <span></span><span class="lm-heat__col">W1</span><span class="lm-heat__col">W2</span><span class="lm-heat__col">W3</span><span class="lm-heat__col">W4</span><span class="lm-heat__col">W5</span>
+          <span class="lm-heat__row">研發</span><span class="lm-heat__cell lm-seq-2" title="研發 W1：12"></span><span class="lm-heat__cell lm-seq-2" title="研發 W2：18"></span><span class="lm-heat__cell lm-seq-3" title="研發 W3：25"></span><span class="lm-heat__cell lm-seq-4" title="研發 W4：31"></span><span class="lm-heat__cell lm-seq-5" title="研發 W5：44"></span>
+          <span class="lm-heat__row">製造</span><span class="lm-heat__cell lm-seq-4" title="製造 W1：40"></span><span class="lm-heat__cell lm-seq-6" title="製造 W2：52"></span><span class="lm-heat__cell lm-seq-7" title="製造 W3：61"></span><span class="lm-heat__cell lm-seq-6" title="製造 W4：58"></span><span class="lm-heat__cell lm-seq-7" title="製造 W5：70"></span>
+          <span class="lm-heat__row">業務</span><span class="lm-heat__cell lm-seq-1" title="業務 W1：8"></span><span class="lm-heat__cell lm-seq-1" title="業務 W2：10"></span><span class="lm-heat__cell lm-seq-2" title="業務 W3：14"></span><span class="lm-heat__cell lm-seq-2" title="業務 W4：12"></span><span class="lm-heat__cell lm-seq-1" title="業務 W5：9"></span>
+          <span class="lm-heat__row">人資</span><span class="lm-heat__cell lm-seq-1" title="人資 W1：3"></span><span class="lm-heat__cell lm-seq-1" title="人資 W2：5"></span><span class="lm-heat__cell lm-seq-1" title="人資 W3：4"></span><span class="lm-heat__cell lm-seq-1" title="人資 W4：6"></span><span class="lm-heat__cell lm-seq-1" title="人資 W5：7"></span>
+        </div>
+        <table class="lm-scale__table">
+          <caption>同一份數值（小時，示意資料）；每 10 小時一階</caption>
+          <thead><tr><th scope="col">部門</th><th scope="col">W1</th><th scope="col">W2</th><th scope="col">W3</th><th scope="col">W4</th><th scope="col">W5</th></tr></thead>
+          <tbody>
+            <tr><td>研發</td><td>12</td><td>18</td><td>25</td><td>31</td><td>44</td></tr>
+            <tr><td>製造</td><td>40</td><td>52</td><td>61</td><td>58</td><td>70</td></tr>
+            <tr><td>業務</td><td>8</td><td>10</td><td>14</td><td>12</td><td>9</td></tr>
+            <tr><td>人資</td><td>3</td><td>5</td><td>4</td><td>6</td><td>7</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

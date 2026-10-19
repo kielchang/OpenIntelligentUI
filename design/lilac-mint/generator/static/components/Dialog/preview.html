@@ -1,0 +1,100 @@
+<!-- @dsCard group="Layout" height=280 -->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dialog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); color: var(--text-primary); font-family: var(--font-sans); padding: var(--space-3) var(--space-4); }
+  .demo-row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; margin-bottom: var(--space-3); }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-3); align-items: start; }
+  .demo-cell { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
+  .lm-demo-label { font: 400 12px/1.4 var(--font-sans); color: var(--text-secondary); }
+</style>
+</head>
+<body>
+  <div class="demo-row">
+    <button type="button" class="lm-dialog__btn lm-dialog__btn--primary" data-lm-dialog-open="dlg-confirm">開啟確認對話框</button>
+    <button type="button" class="lm-dialog__btn" data-lm-dialog-open="dlg-danger">開啟破壞性對話框</button>
+    <span class="lm-demo-label">原生 &lt;dialog&gt;，Esc 與遮罩由瀏覽器處理</span>
+  </div>
+
+  <div class="demo-grid">
+    <div class="demo-cell">
+      <span class="lm-demo-label">確認（內嵌展示）</span>
+      <div class="lm-dialog lm-dialog--inline" role="group" aria-label="確認對話框外觀">
+        <div class="lm-dialog__body">
+          <div class="lm-dialog__head">
+            <div>
+              <h2 class="lm-dialog__title">排程草稿 D-0042？</h2>
+              <p class="lm-dialog__text">3 筆變更將於 <strong>2026-11-01</strong> 生效。排程後仍可在生效前取消。</p>
+            </div>
+          </div>
+          <div class="lm-dialog__actions">
+            <button type="button" class="lm-dialog__btn lm-dialog__btn--ghost">取消</button>
+            <button type="button" class="lm-dialog__btn lm-dialog__btn--primary">確認排程</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="demo-cell">
+      <span class="lm-demo-label">破壞性（內嵌展示）</span>
+      <div class="lm-dialog lm-dialog--inline" role="group" aria-label="破壞性對話框外觀">
+        <div class="lm-dialog__body">
+          <div class="lm-dialog__head">
+            <span class="lm-dialog__icon lm-dialog__icon--danger" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m21.7 18-8-14a2 2 0 0 0-3.5 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z"/><path d="M12 9v4M12 17h.01"/></svg>
+            </span>
+            <div>
+              <h2 class="lm-dialog__title">取消草稿 D-0042？</h2>
+              <p class="lm-dialog__text">草稿內的 3 筆變更會標記為 cancelled，無法復原；版本表不受影響。</p>
+            </div>
+          </div>
+          <div class="lm-dialog__actions">
+            <button type="button" class="lm-dialog__btn lm-dialog__btn--ghost">保留草稿</button>
+            <button type="button" class="lm-dialog__btn lm-dialog__btn--danger">取消草稿</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 真對話框：只由上方按鈕開啟 -->
+  <dialog class="lm-dialog" id="dlg-confirm" aria-labelledby="dlg-confirm-title">
+    <div class="lm-dialog__body">
+      <div class="lm-dialog__head">
+        <div>
+          <h2 class="lm-dialog__title" id="dlg-confirm-title">排程草稿 D-0042？</h2>
+          <p class="lm-dialog__text">3 筆變更將於 <strong>2026-11-01</strong> 生效。排程後仍可在生效前取消。</p>
+        </div>
+      </div>
+      <div class="lm-dialog__actions">
+        <button type="button" class="lm-dialog__btn lm-dialog__btn--ghost" data-lm-dialog-close>取消</button>
+        <button type="button" class="lm-dialog__btn lm-dialog__btn--primary" data-lm-dialog-close>確認排程</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="lm-dialog" id="dlg-danger" aria-labelledby="dlg-danger-title">
+    <div class="lm-dialog__body">
+      <div class="lm-dialog__head">
+        <span class="lm-dialog__icon lm-dialog__icon--danger" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m21.7 18-8-14a2 2 0 0 0-3.5 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z"/><path d="M12 9v4M12 17h.01"/></svg>
+        </span>
+        <div>
+          <h2 class="lm-dialog__title" id="dlg-danger-title">取消草稿 D-0042？</h2>
+          <p class="lm-dialog__text">草稿內的 3 筆變更會標記為 cancelled，無法復原；版本表不受影響。</p>
+        </div>
+      </div>
+      <div class="lm-dialog__actions">
+        <button type="button" class="lm-dialog__btn lm-dialog__btn--ghost" data-lm-dialog-close autofocus>保留草稿</button>
+        <button type="button" class="lm-dialog__btn lm-dialog__btn--danger" data-lm-dialog-close>取消草稿</button>
+      </div>
+    </div>
+  </dialog>
+</body>
+</html>
